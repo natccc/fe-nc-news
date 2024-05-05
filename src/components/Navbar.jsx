@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/icon.svg";
-import {Button, buttonVariants} from "./Button2";
+import { Button, buttonVariants } from "./Button";
 import { cn } from "../lib/utils";
-import { Plus } from 'lucide-react';
+import { Plus } from "lucide-react";
+import Avatar from "../assets/cat.png";
 
 const Navbar = () => {
   return (
@@ -21,8 +22,22 @@ const Navbar = () => {
         </Link>
 
         {/* search bar */}
-
-       <Link href="/sign-in" className={cn(buttonVariants({variant: "default"}))}><Plus className="size-4 mr-1"/><p>Create</p></Link>
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href="/post"
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            <Plus className="mr-1 size-4" />
+            <p>Create</p>
+          </Link>
+          <Link href="/profile">
+            <img
+              src={Avatar}
+              className="border-gray-300-100 w-8 rounded-full border-2 border-solid hover:bg-gray-200"
+              alt="avatar"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );
