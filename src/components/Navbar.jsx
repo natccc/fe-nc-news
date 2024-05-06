@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/icon.svg";
 import { Button, buttonVariants } from "./Button";
@@ -16,7 +15,7 @@ const Navbar = () => {
             alt="news icon"
             className="h-8 w-8 sm:h-6 sm:w-6"
           ></img>
-          <p className="hidden text-sm font-medium text-zinc-700 md:block">
+          <p className="hidden text-lg font-medium text-zinc-700 md:block">
             NC News
           </p>
         </Link>
