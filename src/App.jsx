@@ -1,15 +1,17 @@
-import { useState } from 'react'
-
-import './App.css'
-
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import PostFeed from "./components/PostFeed";
+import { Route, Routes } from "react-router";
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<PostFeed />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
