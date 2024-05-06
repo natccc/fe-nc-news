@@ -1,13 +1,15 @@
 import { useState } from "react";
-import Navbar from "./components/Navbar";
-import PostFeed from "./components/PostFeed";
+import Article from "./pages/Article";
+import Home from "./pages/Home";
 import { Route, Routes } from "react-router";
+import Error from "./pages/Error";
 function App() {
   return (
     <>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<PostFeed />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/articles/:topic/:article_id/comments" element={<Article />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>

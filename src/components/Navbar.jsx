@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <div className="fixed inset-x-0 top-0 z-[10] h-fit border-zinc-300 bg-zinc-100 py-2">
       <div className="container mx-auto flex h-full max-w-7xl items-center justify-between gap-2 ">
-        <Link href="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <img
             src={logo}
             alt="news icon"
@@ -23,7 +23,7 @@ const Navbar = () => {
         {/* search bar */}
         <div className="flex items-center justify-between gap-4">
           <Link
-            href="/post"
+            to="/post"
             className={cn(buttonVariants({ variant: "outline" }))}
           >
             <Plus className="mr-1 size-4" />

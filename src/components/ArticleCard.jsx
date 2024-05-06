@@ -13,23 +13,34 @@ const ArticleCard = (props) => {
     votes,
     article_img_url,
     comment_count,
+    body,
   } = props.articleData;
 
   return (
-    <div className="border-t-2  ">
-      <Link>
+    <Link to={`/articles/${topic}/${article_id}/comments`}>
+      {" "}
+      <article className="border-t-2  ">
         <div className="hover:bg-light_gray p-2 hover:rounded-xl ">
           <div className="flex items-center gap-3">
-            <p className="text-sm font-semibold text-gray-700">/{topic}</p>
-
+            <p className="text-sm font-semibold text-gray-800">/{topic}</p>
             <p className="text-sm text-gray-700">{author}</p>
             <span className="text-xs font-extralight text-gray-400">•</span>
             <p className="text-sm text-gray-400 ">
-              {formatDateToNow(created_at)}
+              {created_at ? formatDateToNow(created_at) : ""}
             </p>
           </div>
 
-          <h2 className="mt-1 text-xl font-semibold text-gray-800">{title}</h2>
+          {body ? (
+            <h1 className="mt-1 text-2xl font-semibold text-gray-800">
+              {title}
+            </h1>
+          ) : (
+            <h1 className="mt-1 text-xl font-semibold text-gray-800">
+              {title}
+            </h1>
+          )}
+
+          {body ? <p className="mb-3 mt-2 text-gray-700">{body}</p> : ""}
 
           <div className="mt-2">
             <img
@@ -40,11 +51,10 @@ const ArticleCard = (props) => {
 
           <div className="mt-2 flex items-center gap-4">
             {/* vote button */}
-
             <div className="flex h-10 items-center justify-between gap-1 rounded-md bg-[#EAEDEF]  px-1 ">
               <button className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900">
                 <svg
-                  className="w-8 rounded-full  bg-[#EAEDEF]  hover:stroke-red-700 hover:bg-zinc-200 "
+                  className="w-8 rounded-full  bg-[#EAEDEF]  hover:bg-zinc-200 hover:stroke-red-700 "
                   viewBox="-6.24 -6.24 36.48 36.48"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -75,7 +85,7 @@ const ArticleCard = (props) => {
             </div>
 
             {/* Comment button */}
-          
+
             <Button variant="subtle" className="bg-[#EAEDEF] p-1 ">
               {" "}
               <svg
@@ -96,8 +106,8 @@ const ArticleCard = (props) => {
             </Button>
           </div>
         </div>
-      </Link>{" "}
-    </div>
+      </article>{" "}
+    </Link>
   );
 };
 
