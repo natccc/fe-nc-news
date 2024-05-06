@@ -7,10 +7,9 @@ export function cn(...inputs) {
 }
 
 export function formatDateToNow(dateString) {
-  const date = new Date(dateString);
-  const formattedRelativeTime = formatDistanceToNow(date, {
+ return formatDistanceToNow(new Date(dateString), {
     addSuffix: true,
     locale: enGB,
   });
-  return formattedRelativeTime;
+  ;
 }
