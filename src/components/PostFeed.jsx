@@ -14,7 +14,7 @@ const PostFeed = () => {
   useEffect(() => {
     const getArticles = async () => {
       const res = await axios.get(
-        `https://be-news-api-h65m.onrender.com/api/articles?p=1`,
+        `https://be-news-api-h65m.onrender.com/api/articles?p=1&limit=5`,
       );
       setItems(res.data.articles);
     };
@@ -23,7 +23,7 @@ const PostFeed = () => {
 
   const fetchArticles = async () => {
       const res = await axios.get(
-        `https://be-news-api-h65m.onrender.com/api/articles?p=${page}`,
+        `https://be-news-api-h65m.onrender.com/api/articles?p=${page}&limit=5`,
       );
       return res.data.articles;
     };
@@ -34,7 +34,7 @@ const PostFeed = () => {
     console.log(articlesFromServer)
 
     setItems([...items, ...articlesFromServer]);
-    if (articlesFromServer.length === 0 || articlesFromServer.length < 10) {
+    if (articlesFromServer.length === 0 || articlesFromServer.length < 5) {
       setHasMore(false);
     }
     setPage(page + 1);
@@ -45,7 +45,9 @@ const PostFeed = () => {
       dataLength={items.length} //This is important field to render the next data
       next={fetchData}
       hasMore={hasMore}
-      loader={<h4>Loading...</h4>}
+      loader={<div className="flex items-center justify-center">
+        <Loader />
+        </div >}
       endMessage={
         <p style={{ textAlign: "center" }}>
           <b>Yay! You have seen it all</b>
