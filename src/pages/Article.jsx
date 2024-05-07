@@ -14,7 +14,7 @@ const Article = () => {
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
-
+console.log(comments)
 
   useEffect(() => {
     getArticle(params.article_id)
@@ -47,9 +47,10 @@ const Article = () => {
         <ArticleCard articleData={article} />
 
         <div className="flex flex-col rounded-lg border p-4 ">
-          {comments.map((comment) => {
+          {comments.length? comments.map((comment) => {
             return <CommentCard comment={comment}  key={comment.comment_id}/>
-          })}
+          }) : <p className="text-center my-2">No comments yet</p>
+        } 
         </div>
       </div>
     </>
