@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 import Avatar from "../assets/cat.png";
 
 const Navbar = () => {
+  const user = "jessjelly"
   return (
     <div className="fixed inset-x-0 top-0 z-[10] h-fit border-zinc-300 bg-zinc-100 py-2">
       <div className="container mx-auto flex h-full max-w-7xl items-center justify-between gap-2 ">
@@ -29,7 +30,7 @@ const Navbar = () => {
             <Plus className="mr-1 size-4" />
             <p>Create</p>
           </Link>
-          <Link to="/profile/jessjelly">
+          <Link to={`/profile/${user}`}>
             <img
               src={Avatar}
               className="border-gray-300-100 w-8 rounded-full border-2 border-solid hover:bg-gray-200"

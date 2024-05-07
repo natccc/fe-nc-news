@@ -9,11 +9,12 @@ const NewCommentCard = (props) => {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const user= "jessjelly"
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setStatus("posting");
-    postComment(article_id, {username: "jessjelly", body: input})
+    postComment(article_id, { username: user, body: input })
       .then((res) => {
         setStatus("posted");
         setShowModal(true);
@@ -26,16 +27,15 @@ const NewCommentCard = (props) => {
       });
   };
 
-
   return (
-    <div className="p-2 bg-white rounded-xl border  shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-600">
+    <div className="rounded-xl border bg-white p-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-600">
       <form onSubmit={(e) => handleSubmit(e)}>
         <textarea
           type="text"
           disabled={status === "posting"}
           required
           rows={3}
-          className=" mx-2 block w-full outline-none resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+          className=" mx-2 block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
           placeholder="Add your comment..."
           border="hidden"
           value={input}
@@ -44,8 +44,8 @@ const NewCommentCard = (props) => {
         <div className="text-right">
           {" "}
           <Button
-          type="button"
-          className="mr-3"
+            type="button"
+            className="mr-3"
             variant={"subtle"}
             onClick={(e) => {
               setInput("");
@@ -53,10 +53,7 @@ const NewCommentCard = (props) => {
           >
             Cancel
           </Button>
-          <Button
-            className="bg-red-800 "
-          type = "submit"
-          >
+          <Button className="bg-red-800 hover:bg-red-900 " type="submit">
             Post
           </Button>
         </div>

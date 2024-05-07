@@ -1,6 +1,8 @@
 import React from 'react'
 import { formatDateToNow } from "../lib/utils";
+import { deleteComment } from '../lib/api';
 const CommentCard = ({comment}) => {
+const user = "jessjelly"
   return (
     <div className="border-t-2  pt-1">
     <div className="flex items-center gap-1">

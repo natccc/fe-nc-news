@@ -34,5 +34,8 @@ const patchArticle = (article_id, vote) => {
 const postComment = (article_id, reqBody) => {
   return myApi.post(`/articles/${article_id}/comments`, reqBody).then(res=>res.data.comment);
 }
+const deleteComment = (comment_id) => {
+  return myApi.delete(`/comments/${comment_id}`);
+}
 
-export { getArticles, fetchArticles, getArticle, getComments, patchArticle, postComment };
+export { getArticles, fetchArticles, getArticle, getComments, patchArticle, postComment, deleteComment };
