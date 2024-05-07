@@ -28,9 +28,7 @@ const getComments = (article_id) => {
 };
 
 const patchArticle = (article_id, vote) => {
-  return myApi.patch(`/articles/${article_id}`).send({ inc_votes: `${vote}`}).
-    then((res) => {
-    return res.data.article;
-  });
+  return myApi
+    .patch(`/articles/${article_id}`, { inc_votes: `${vote}` })
 };
 export { getArticles, fetchArticles, getArticle, getComments, patchArticle };

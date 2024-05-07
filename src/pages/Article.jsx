@@ -14,7 +14,6 @@ const Article = () => {
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
-console.log(comments)
 
   useEffect(() => {
     getArticle(params.article_id)

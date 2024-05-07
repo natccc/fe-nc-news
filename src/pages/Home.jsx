@@ -7,20 +7,20 @@ import { getArticles, fetchArticles } from "../lib/api";
 
 const Home = () => {
   const [page, setPage] = useState(2);
-  const [items, setItems] = useState([]);
+  const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     getArticles()
-      .then((data) => setItems(data))
+      .then((data) => setArticles(data))
       .catch((err) => setError(err));
   }, []);
 
   const fetchData = async () => {
     const articlesFromServer = await fetchArticles(page);
 
-    setItems([...items, ...articlesFromServer]);
+    setArticles([...articles, ...articlesFromServer]);
     if (articlesFromServer.length === 0 || articlesFromServer.length < 5) {
       setHasMore(false);
     }
@@ -30,11 +30,11 @@ const Home = () => {
   return (
     <>
       <InfiniteScroll
-        dataLength={items.length} 
+        dataLength={articles.length} 
         next={fetchData}
         hasMore={hasMore}
         loader={
-          <div className="flex items-center justify-center">
+          <div className="flex articles-center justify-center">
             <Loader className="text-gray-700"/>
           </div>
         }
@@ -46,11 +46,11 @@ const Home = () => {
       >
         <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
           <ul className="md:space-y-3">
-            {items.map((articleData) => {
+            {articles.map((article) => {
               return (
                 <ArticleCard
-                  articleData={articleData}
-                  key={articleData.article_id}
+                  article={article}
+                  key={article.article_id}
                 />
               );
             })}
