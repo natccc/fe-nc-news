@@ -22,7 +22,7 @@ const NewCommentCard = (props) => {
           return [res, ...currComments];
         });
       })
-      .catch((err) => {
+      .catch(() => {
         setStatus("error");
       });
   };

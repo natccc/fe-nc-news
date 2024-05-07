@@ -48,10 +48,10 @@ const Article = () => {
       <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
         <ArticleCard article={article} />
         <NewCommentCard article_id={article.article_id} setComments={setComments}/>
-        <div className="flex flex-col rounded-lg border p-4 ">
+        <div className="flex flex-col rounded-lg border p-2 ">
           {comments.length ? (
             comments.map((comment) => {
-              return <CommentCard comment={comment} key={comment.comment_id} />;
+              return <CommentCard comment={comment} setComments={setComments} key={comment.comment_id} />;
             })
           ) : (
             <p className="my-2 text-center">No comments yet</p>
