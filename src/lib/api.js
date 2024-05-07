@@ -32,7 +32,7 @@ const patchArticle = (article_id, vote) => {
     .patch(`/articles/${article_id}`, { inc_votes: `${vote}` })
 };
 const postComment = (article_id, comment) => {
-  return myApi.post(`/articles/${article_id}/comments`, comment);
+  return myApi.post(`/articles/${article_id}/comments`, comment).then(res=>res.data.comment);
 }
 
-export { getArticles, fetchArticles, getArticle, getComments, patchArticle };
+export { getArticles, fetchArticles, getArticle, getComments, patchArticle, postComment };

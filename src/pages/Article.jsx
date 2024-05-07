@@ -7,6 +7,7 @@ import { CircleArrowLeft } from "lucide-react";
 import { getArticle, getComments } from "../lib/api";
 import Loading from "../components/Loading";
 import CommentCard from "../components/CommentCard";
+import NewCommentCard from "../components/NewCommentCard";
 
 const Article = () => {
   const params = useParams();
@@ -35,7 +36,9 @@ const Article = () => {
 
   if (error) return <Error />;
 
-    return loading? <Loading/> :  (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <Link to={"/"}>
         <div className="absolute ml-12 mt-11">
@@ -43,18 +46,20 @@ const Article = () => {
         </div>
       </Link>
       <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
-        <ArticleCard article={article}/>
-
+        <ArticleCard article={article} />
+        <NewCommentCard />
         <div className="flex flex-col rounded-lg border p-4 ">
-          {comments.length? comments.map((comment) => {
-            return <CommentCard comment={comment}  key={comment.comment_id}/>
-          }) : <p className="text-center my-2">No comments yet</p>
-        } 
+          {comments.length ? (
+            comments.map((comment) => {
+              return <CommentCard comment={comment} key={comment.comment_id} />;
+            })
+          ) : (
+            <p className="my-2 text-center">No comments yet</p>
+          )}
         </div>
       </div>
     </>
-    
-  )
+  );
 };
 
 export default Article;

@@ -29,7 +29,7 @@ const Navbar = () => {
             <Plus className="mr-1 size-4" />
             <p>Create</p>
           </Link>
-          <Link href="/profile">
+          <Link to="/profile/jessjelly">
             <img
               src={Avatar}
               className="border-gray-300-100 w-8 rounded-full border-2 border-solid hover:bg-gray-200"
