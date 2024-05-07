@@ -43,7 +43,7 @@ const Article = () => {
         </div>
       </Link>
       <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
-        <ArticleCard article={article} setArticle={setArticle}/>
+        <ArticleCard article={article}/>
 
         <div className="flex flex-col rounded-lg border p-4 ">
           {comments.length? comments.map((comment) => {

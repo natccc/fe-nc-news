@@ -8,25 +8,25 @@ const ArticleVoteBtn = (props) => {
   const handleVote = (vote) => {
     setVoteChange((curr) => curr + vote);
     patchArticle(article.article_id, vote)
-      .then(() => {
-      })
+      .then(() => {})
       .catch((err) => {
+        setVoteChange(0);
         setError(true);
       });
   };
-  let voteDisplay = article.votes + voteChange;
-  if (error) {
-    voteDisplay = article.votes;
-  }
+
   return (
     <>
       <div className="flex h-10 items-center justify-between gap-1 rounded-md bg-[#EAEDEF]  px-1 ">
         <button
-          onClick={() => voteChange===1? handleVote(-1) : handleVote(1)}
+          onClick={(e) => {
+            e.preventDefault();
+            voteChange === 1 ? handleVote(-1) : handleVote(1);
+          }}
           className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors active:scale-95 "
         >
           <svg
-            className={`w-8 rounded-full  bg-[#EAEDEF]  hover:bg-zinc-200 hover:stroke-red-700 ${voteChange===1? "stroke-red-700" : ""}`}
+            className={`w-8 rounded-full  bg-[#EAEDEF]  hover:bg-zinc-200 hover:stroke-red-700 ${voteChange === 1 ? "stroke-red-700" : ""}`}
             viewBox="-6.24 -6.24 36.48 36.48"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -39,14 +39,19 @@ const ArticleVoteBtn = (props) => {
         </button>
 
         <span className="text-sm font-semibold text-gray-800">
-          {voteDisplay !== 0 ? voteDisplay : "Vote"}
+          {article.votes + voteChange !== 0
+            ? article.votes + voteChange
+            : "Vote"}
         </span>
         <button
-          onClick={() => voteChange===-1? handleVote(1) : handleVote(-1)}
+          onClick={(e) => {
+            e.preventDefault();
+            voteChange === -1 ? handleVote(1) : handleVote(-1);
+          }}
           className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors hover:bg-zinc-200 active:scale-95"
         >
           <svg
-            className={`w-8 rotate-180 rounded-full bg-[#EAEDEF] hover:bg-zinc-200 hover:stroke-purple-700 ${voteChange===-1? "stroke-purple-700" : ""}`}
+            className={`w-8 rotate-180 rounded-full bg-[#EAEDEF] hover:bg-zinc-200 hover:stroke-purple-700 ${voteChange === -1 ? "stroke-purple-700" : ""}`}
             viewBox="-6.24 -4.24 36.48 36.48"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
