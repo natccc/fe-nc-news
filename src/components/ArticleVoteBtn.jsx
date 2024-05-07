@@ -17,10 +17,9 @@ const ArticleVoteBtn = (props) => {
 
   return (
     <>
-      <div className="flex h-10 items-center justify-between gap-1 rounded-md bg-[#EAEDEF]  px-1 ">
+      <div className="flex h-10 items-center justify-between gap-1 rounded-md bg-[#EAEDEF]  px-1 " onClick={e=>e.preventDefault()}>
         <button
           onClick={(e) => {
-            e.preventDefault();
             voteChange === 1 ? handleVote(-1) : handleVote(1);
           }}
           className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors active:scale-95 "
@@ -45,7 +44,6 @@ const ArticleVoteBtn = (props) => {
         </span>
         <button
           onClick={(e) => {
-            e.preventDefault();
             voteChange === -1 ? handleVote(1) : handleVote(-1);
           }}
           className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors hover:bg-zinc-200 active:scale-95"
