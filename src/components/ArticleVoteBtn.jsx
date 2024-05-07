@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VoteBtn = ({votes}) => {
+const ArticleVoteBtn = ({votes}) => {
   return (
     <div className="flex h-10 items-center justify-between gap-1 rounded-md bg-[#EAEDEF]  px-1 ">
     <button className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900">
@@ -37,4 +37,4 @@ const VoteBtn = ({votes}) => {
   )
 }
 
-export default VoteBtn
+export default ArticleVoteBtn

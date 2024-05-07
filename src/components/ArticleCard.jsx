@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "./Button";
 import { formatDateToNow } from "../lib/utils";
 import { Link } from "react-router-dom";
-import VoteBtn from "./VoteBtn";
+import ArticleVoteBtn from "./ArticleVoteBtn";
 
 const ArticleCard = (props) => {
   const {
@@ -17,7 +17,7 @@ const ArticleCard = (props) => {
     body,
   } = props.articleData;
   return (
-    <Link to={`/articles/${topic}/${article_id}/comments`}>
+    <Link to={`/articles/${topic}/${article_id}`}>
       {" "}
       <article className="border-t-2  ">
         <div className="hover:bg-light_gray p-2 hover:rounded-xl ">
@@ -25,7 +25,7 @@ const ArticleCard = (props) => {
             <p className="text-sm font-semibold text-gray-800">/{topic}</p>
             <p className="text-sm text-gray-700">{author}</p>
             <span className="text-xs font-extralight text-gray-400">•</span>
-            <p className="text-sm text-gray-400 ">
+            <p className="text-xs text-gray-500 ">
               {created_at ? formatDateToNow(created_at) : ""}
             </p>
           </div>
@@ -50,10 +50,8 @@ const ArticleCard = (props) => {
           </div>
 
           <div className="mt-3 flex items-center gap-4">
-            {/* vote button */}
-            <VoteBtn votes={votes}/>
-
-            {/* Comment button */}
+  
+            <ArticleVoteBtn votes={votes} />
 
             <Button variant="subtle" className="bg-[#EAEDEF] p-1 ">
               {" "}

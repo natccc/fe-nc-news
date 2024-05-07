@@ -20,7 +20,7 @@ const Navbar = () => {
           </p>
         </Link>
 
-        {/* search bar */}
+     
         <div className="flex items-center justify-between gap-4">
           <Link
             to="/post"

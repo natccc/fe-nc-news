@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import ArticleCard from "../components/ArticleCard";
 import Error from "./Error";
 import { Loader } from "lucide-react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
+import { getArticles, fetchArticles } from "../lib/api";
 
 const Home = () => {
   const [page, setPage] = useState(2);
@@ -14,24 +12,13 @@ const Home = () => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    const getArticles = async () => {
-      const res = await axios.get(
-        `https://be-news-api-h65m.onrender.com/api/articles?p=1&limit=5`,
-      );
-      setItems(res.data.articles);
-    };
-    getArticles();
+    getArticles()
+      .then((data) => setItems(data))
+      .catch((err) => setError(err));
   }, []);
 
-  const fetchArticles = async () => {
-    const res = await axios.get(
-      `https://be-news-api-h65m.onrender.com/api/articles?p=${page}&limit=5`,
-    );
-    return res.data.articles;
-  };
-
   const fetchData = async () => {
-    const articlesFromServer = await fetchArticles();
+    const articlesFromServer = await fetchArticles(page);
 
     setItems([...items, ...articlesFromServer]);
     if (articlesFromServer.length === 0 || articlesFromServer.length < 5) {
@@ -42,15 +29,13 @@ const Home = () => {
 
   return (
     <>
-      <Navbar></Navbar>
-      
       <InfiniteScroll
-        dataLength={items.length} //This is important field to render the next data
+        dataLength={items.length} 
         next={fetchData}
         hasMore={hasMore}
         loader={
           <div className="flex items-center justify-center">
-            <Loader />
+            <Loader className="text-gray-700"/>
           </div>
         }
         endMessage={
@@ -59,24 +44,24 @@ const Home = () => {
           </p>
         }
       >
-          <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
-            <ul className="md:space-y-3">
-              {items.map((articleData) => {
-                return (
-                  <ArticleCard
-                    articleData={articleData}
-                    key={articleData.article_id}
-                  />
-                );
-              })}
-            </ul>{" "}
-            {error && (
-              <Error
-                message={error.response.data.message}
-                code={error.response.status}
-              />
-            )}
-          </div>
+        <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
+          <ul className="md:space-y-3">
+            {items.map((articleData) => {
+              return (
+                <ArticleCard
+                  articleData={articleData}
+                  key={articleData.article_id}
+                />
+              );
+            })}
+          </ul>{" "}
+          {error && (
+            <Error
+              message={error.response.data.message}
+              code={error.response.status}
+            />
+          )}
+        </div>
       </InfiniteScroll>
     </>
   );
