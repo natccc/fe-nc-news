@@ -2,6 +2,7 @@ import { formatDateToNow } from "../lib/utils";
 import { deleteComment } from "../lib/api";
 import { Button } from "./Button";
 import { useState } from "react";
+import { TrashIcon } from "@heroicons/react/24/outline"; 
 const CommentCard = (props) => {
   const {comment, setComments}= props
   const user = "jessjelly";
@@ -65,7 +66,7 @@ const handleDelete = () => {
             </svg>
           </button>
         </div>
-       {comment.author===user && (<button onClick={handleDelete} className="text-xs h-10 px-2 font-semibold border border-gray-700 rounded-md">Delete</button>)}
+       {comment.author===user && (<button onClick={handleDelete} className=" h-8 px-2 font-semibold border rounded-md"> <TrashIcon aria-label="delete comment" className="w-4 text-gray-700 transition-colors hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"></TrashIcon></button>)}
       {status==="deleting" && <p className="">Deleting...</p>}
       {status==="deleted" && <p className="">Successfully deleted</p>}
       {status==="error" && <p className="">Error. Please try again later.</p>}
