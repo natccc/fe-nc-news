@@ -4,14 +4,14 @@ const myApi = axios.create({
   baseURL: "https://be-news-api-h65m.onrender.com/api",
 });
 
-const getArticles = () => {
-  return myApi.get(`/articles?p=1&limit=5`).then((res) => {
+const getArticles = (topic="") => {
+  return myApi.get(`/articles?p=1&limit=5&topic=${topic}`).then((res) => {
     return res.data.articles;
   });
 };
 
-const fetchArticles = (page) => {
-  return myApi.get(`/articles?p=${page}&limit=5`).then((res) => {
+const fetchArticles = (page,topic="") => {
+  return myApi.get(`/articles?p=${page}&limit=5&topic=${topic}`).then((res) => {
     return res.data.articles;
   });
 };
@@ -37,5 +37,13 @@ const postComment = (article_id, reqBody) => {
 const deleteComment = (comment_id) => {
   return myApi.delete(`/comments/${comment_id}`);
 }
+const getTopics = () => {
+  return myApi.get(`/topics`).then((res) => {
+    return res.data.topics;
+  });
+}
 
-export { getArticles, fetchArticles, getArticle, getComments, patchArticle, postComment, deleteComment };
+
+
+
+export { getArticles, fetchArticles, getArticle, getComments, patchArticle, postComment, deleteComment , getTopics};

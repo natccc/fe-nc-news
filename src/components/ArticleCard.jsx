@@ -8,7 +8,7 @@ const ArticleCard = (props) => {
   const { article, setArticle } = props;
 
   return (
-    <Link to={`/articles/${article.topic}/${article.article_id}`}>
+    <Link to={`/articles/${article.article_id}`}>
       {" "}
       <article className="border-t-2  ">
         <div className="hover:bg-light_gray p-2 hover:rounded-xl ">

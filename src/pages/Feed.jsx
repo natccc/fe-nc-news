@@ -4,21 +4,22 @@ import Error from "./Error";
 import { Loader } from "lucide-react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getArticles, fetchArticles } from "../lib/api";
-
-const Home = () => {
+import { useParams } from "react-router-dom";
+const Feed = () => {
   const [page, setPage] = useState(2);
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
-
+  const params = useParams();
+  const topicTitle = params.topic ? params.topic : "all";
   useEffect(() => {
-    getArticles()
+    getArticles(params.topic)
       .then((data) => setArticles(data))
       .catch((err) => setError(err));
   }, []);
 
   const fetchData = async () => {
-    const articlesFromServer = await fetchArticles(page);
+    const articlesFromServer = await fetchArticles(page,params.topic);
 
     setArticles([...articles, ...articlesFromServer]);
     if (articlesFromServer.length === 0 || articlesFromServer.length < 5) {
@@ -29,6 +30,7 @@ const Home = () => {
 
   return (
     <>
+ 
       <InfiniteScroll
         dataLength={articles.length} 
         next={fetchData}
@@ -45,7 +47,8 @@ const Home = () => {
         }
       >
         <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
-          <ul className="md:space-y-3">
+        <h1 className="capitalize text-2xl font-bold m-2 text-gray-900">{topicTitle}</h1>          
+        <ul className="md:space-y-3">
             {articles.map((article) => {
               return (
                 <ArticleCard
@@ -67,4 +70,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Feed;
