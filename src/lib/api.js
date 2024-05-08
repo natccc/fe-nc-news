@@ -52,6 +52,13 @@ const getTopics = () => {
   });
 };
 
+const getUsers = ()=>{
+  return myApi.get(`/users`).then((res)=>{
+    return res.data.users
+  })
+
+}
+
 export {
   getArticles,
   fetchArticles,
@@ -61,4 +68,5 @@ export {
   postComment,
   deleteComment,
   getTopics,
+  getUsers
 };

@@ -1,11 +1,12 @@
-import { useState } from "react";
 import Article from "./pages/Article";
 import Feed from "./pages/Feed";
 import { Route, Routes } from "react-router";
 import Error from "./pages/Error";
 import Navbar from "./components/Navbar";
-import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 import TopicsList from "./pages/TopicsList";
+
+
 function App() {
   return (
     <>
@@ -13,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Feed />} />
         <Route path="/all" element={<Feed />} />
-        <Route path="/profile/jessjelly" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/articles/:article_id" element={<Article />} />
         <Route path="/t" element={<TopicsList />} />
         <Route path="/t/:topic" element={<Feed />} />

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { postComment } from "../lib/api";
 import { Button } from "./Button";
 import SuccessUpload from "./SuccessBox";
 import ErrorMsg from "./ErrorMsg";
-
+import { UserContext } from "../contexts/User";
 const NewCommentCard = (props) => {
   const { article_id, setComments } = props;
   const [input, setInput] = useState("");
   const [status, setStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const user= "jessjelly"
+  const { username } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus("posting");
-    postComment(article_id, { username: user, body: input })
+    postComment(article_id, { username: username, body: input })
       .then((res) => {
         setStatus(null);
         setInput("")
