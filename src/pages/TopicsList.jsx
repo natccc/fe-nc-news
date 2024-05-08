@@ -15,8 +15,8 @@ const TopicsList = () => {
         <ul className="flex flex-col gap-5">
           {topics.map((topic) => {
             return (
-              <Link to={`/topics/${topic.slug}`} key={topic.slug}>
-                <li className="text-blue-800 hover:text-blue-500">{topic.slug}</li>
+              <Link to={`/t/${topic.slug}`} key={topic.slug}>
+                <li className="capitalize text-blue-800 hover:text-blue-500">{topic.slug}</li>
               </Link>
             );
           })}

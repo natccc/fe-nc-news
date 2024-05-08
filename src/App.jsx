@@ -12,11 +12,11 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Feed />} />
-        <Route path="/home" element={<Feed />} />
+        <Route path="/all" element={<Feed />} />
         <Route path="/profile/jessjelly" element={<Profile />} />
         <Route path="/articles/:article_id" element={<Article />} />
-        <Route path="/topics" element={<TopicsList />} />
-        <Route path="/topics/:topic" element={<Feed />} />
+        <Route path="/t" element={<TopicsList />} />
+        <Route path="/t/:topic" element={<Feed />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>

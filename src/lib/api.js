@@ -4,16 +4,24 @@ const myApi = axios.create({
   baseURL: "https://be-news-api-h65m.onrender.com/api",
 });
 
-const getArticles = (topic="") => {
-  return myApi.get(`/articles?p=1&limit=5&topic=${topic}`).then((res) => {
-    return res.data.articles;
-  });
+const getArticles = (topic, sortBy, orderBy) => {
+  return myApi
+    .get(
+      `/articles?p=1&limit=5&topic=${topic}&sort_by=${sortBy}&order=${orderBy}`,
+    )
+    .then((res) => {
+      return res.data.articles;
+    });
 };
 
-const fetchArticles = (page,topic="") => {
-  return myApi.get(`/articles?p=${page}&limit=5&topic=${topic}`).then((res) => {
-    return res.data.articles;
-  });
+const fetchArticles = (page, topic, sortBy, orderBy) => {
+  return myApi
+    .get(
+      `/articles?p=${page}&limit=5&topic=${topic}&sort_by=${sortBy}&order=${orderBy}`,
+    )
+    .then((res) => {
+      return res.data.articles;
+    });
 };
 const getArticle = (article_id) => {
   return myApi.get(`/articles/${article_id}`).then((res) => {
@@ -28,22 +36,29 @@ const getComments = (article_id) => {
 };
 
 const patchArticle = (article_id, vote) => {
-  return myApi
-    .patch(`/articles/${article_id}`, { inc_votes: `${vote}` })
+  return myApi.patch(`/articles/${article_id}`, { inc_votes: `${vote}` });
 };
 const postComment = (article_id, reqBody) => {
-  return myApi.post(`/articles/${article_id}/comments`, reqBody).then(res=>res.data.comment);
-}
+  return myApi
+    .post(`/articles/${article_id}/comments`, reqBody)
+    .then((res) => res.data.comment);
+};
 const deleteComment = (comment_id) => {
   return myApi.delete(`/comments/${comment_id}`);
-}
+};
 const getTopics = () => {
   return myApi.get(`/topics`).then((res) => {
     return res.data.topics;
   });
-}
+};
 
-
-
-
-export { getArticles, fetchArticles, getArticle, getComments, patchArticle, postComment, deleteComment , getTopics};
+export {
+  getArticles,
+  fetchArticles,
+  getArticle,
+  getComments,
+  patchArticle,
+  postComment,
+  deleteComment,
+  getTopics,
+};
