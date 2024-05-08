@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 import Avatar from "../assets/cat.png";
 
 const Navbar = () => {
-  const user = "jessjelly"
+  const user = "jessjelly";
   return (
     <div className="fixed inset-x-0 top-0 z-[10] h-fit border-zinc-300 bg-zinc-100 py-2">
       <div className="container mx-auto flex h-full max-w-7xl items-center justify-between gap-2 ">
@@ -21,8 +21,14 @@ const Navbar = () => {
           </p>
         </Link>
 
-     
         <div className="flex items-center justify-between gap-4">
+          <Link
+            to="/topics"
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            <p>Topics</p>{" "}
+          </Link>
+
           <Link
             to="/post"
             className={cn(buttonVariants({ variant: "outline" }))}
