@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
 const Error = ({message, code}) => {
   const navigate= useNavigate()
   const handleClick=()=>{
-    navigate("/")
+    navigate("/all")
+    navigate(0)
   }
   return (
     <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -18,7 +18,7 @@ const Error = ({message, code}) => {
           Sorry, we couldn’t find the page you’re looking for.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Button onClick={handleClick}>Go back home</Button>
+            <Button onClick={handleClick}>Back</Button>
           
         </div>
       </div>

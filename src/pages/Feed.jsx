@@ -4,7 +4,7 @@ import Error from "./Error";
 import { Loader } from "lucide-react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getArticles, fetchArticles } from "../lib/api";
-import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 
 const Feed = () => {
@@ -18,12 +18,17 @@ const Feed = () => {
   const navigate = useNavigate();
   const pageTitle = params.topic ? params.topic : "all";
   const topic = params.topic ? params.topic : "";
-  useEffect(() => {
-    getArticles(topic, sortBy, orderBy)
-      .then((data) => setArticles(data))
-      .catch((err) => setError(err));
-  }, [sortBy, orderBy]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getArticles(topic, sortBy, orderBy);
+        setArticles(data);
+      } catch (err) {
+        setError(err);
+      }
+    })();
+  }, [sortBy, orderBy]);
   const fetchData = async () => {
     const articlesFromServer = await fetchArticles(
       page,
@@ -52,6 +57,11 @@ const Feed = () => {
       : navigate(`?sort=${sortBy}&order=${e.target.value}`);
   };
 
+ if(error){
+  return <Error code={error.response.status} message= {error.response.data.message}></Error>
+ } 
+
+
   return (
     <>
       <InfiniteScroll
@@ -64,13 +74,18 @@ const Feed = () => {
           </div>
         }
         endMessage={
-          <p className="text-center my-8 text-gray-600 font-thin ">
+          <p className="my-8 text-center font-thin text-gray-600 ">
             <b>Yay! You have seen it all</b>
           </p>
         }
       >
         <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
-          <select className="my-2 mx-1" name="sort_by" id="" onChange={(e) => handleSort(e)}>
+          <select
+            className="mx-1 my-2"
+            name="sort_by"
+            id=""
+            onChange={(e) => handleSort(e)}
+          >
             <option value="created_at">Date</option>
             <option value="votes">Votes</option>
             <option value="comment_count">Comments</option>
@@ -87,12 +102,7 @@ const Feed = () => {
               return <ArticleCard article={article} key={article.article_id} />;
             })}
           </ul>{" "}
-          {error && (
-            <Error
-              message={error.response.data.message}
-              code={error.response.status}
-            />
-          )}
+        
         </div>
       </InfiniteScroll>
     </>
