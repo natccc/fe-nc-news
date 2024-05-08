@@ -20,7 +20,7 @@ const handleDelete = () => {
   const [status, setStatus] = useState(null);
 
   return (
-    <div className="border-2 p-2 pt-1">
+    <div className="border-2 p-2 m-1 pt-1 rounded-md ">
       <div className="flex items-center gap-1">
         <p className="text-sm font-semibold text-gray-800">{comment.author}</p>
         <span className="text-xs font-extralight text-gray-400">•</span>
@@ -32,8 +32,8 @@ const handleDelete = () => {
         <p className="text-sm text-gray-700">{comment.body}</p>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="flex h-10 w-24 items-center justify-between gap-1 rounded-md  px-1 ">
+      <div className="flex items-center gap-4 rounded-md">
+        <div className="flex h-10 w-24 items-center justify-between gap-1   px-1 ">
           <button className="inline-flex items-center justify-center rounded-full  text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900">
             <svg
               className="w-6 rounded-full   hover:bg-zinc-200 hover:stroke-red-700 "
