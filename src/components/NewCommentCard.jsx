@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { postComment } from "../lib/api";
 import { Button } from "./Button";
-import SuccessUpload from "./SuccessUpload";
+import SuccessUpload from "./SuccessBox";
 import ErrorMsg from "./ErrorMsg";
 
 const NewCommentCard = (props) => {
@@ -16,7 +16,8 @@ const NewCommentCard = (props) => {
     setStatus("posting");
     postComment(article_id, { username: user, body: input })
       .then((res) => {
-        setStatus("posted");
+        setStatus(null);
+        setInput("")
         setShowModal(true);
         setComments((currComments) => {
           return [res, ...currComments];
@@ -57,8 +58,9 @@ const NewCommentCard = (props) => {
             Post
           </Button>
         </div>
-        {showModal && <SuccessUpload setShowModal={setShowModal} />}
+        {showModal && <SuccessUpload message="Successfully posted" setShowModal={setShowModal} />}
         {status === "error" && <ErrorMsg />}
+        {status === "posting" && <p>Posting...</p>}
       </form>
     </div>
   );
