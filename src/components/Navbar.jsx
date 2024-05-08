@@ -4,7 +4,6 @@ import { Button, buttonVariants } from "./Button";
 import { cn } from "../lib/utils";
 import { Plus } from "lucide-react";
 import Avatar from "../assets/cat.png";
-
 const Navbar = () => {
   const user = "jessjelly";
   return (

@@ -9,7 +9,7 @@ import Loading from "../components/Loading";
 import CommentCard from "../components/CommentCard";
 import NewCommentCard from "../components/NewCommentCard";
 
-const Article = () => {
+const Article = ({}) => {
   const params = useParams();
   const [article, setArticle] = useState([]);
   const [error, setError] = useState(null);
@@ -17,22 +17,29 @@ const Article = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getArticle(params.article_id)
-      .then((data) => {
-        setLoading(false);
+    (async () => {
+      try {
+        const data = await getArticle(params.article_id);
         setArticle(data);
-      })
-      .catch((err) => {
         setLoading(false);
+      } catch (err) {
         setError(err);
-      });
+        setLoading(false);
+      }
+    })();
   }, []);
 
   useEffect(() => {
-    getComments(params.article_id)
-      .then((data) => setComments(data))
-      .catch((err) => setError(err));
+    (async () => {
+      try {
+        const data = await getComments(params.article_id);
+        setComments(data)
+      } catch (err) {
+        setError(err);
+      }
+    })();
   }, []);
+
 
   if (error) return <Error />;
 
@@ -40,7 +47,7 @@ const Article = () => {
     <Loading />
   ) : (
     <>
-      <Link to={"/"}>
+      <Link to={"/all"}>
         <div className="absolute ml-12 mt-11">
           <CircleArrowLeft className="size-10 rounded-full stroke-gray-400 hover:bg-gray-100" />
         </div>
