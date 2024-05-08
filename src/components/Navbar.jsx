@@ -8,7 +8,6 @@ import { UserContext } from "../contexts/User";
 
 const Navbar = () => {
   const { avatarUrl } = useContext(UserContext);
-  console.log(avatarUrl)
 
   return (
     <div className="fixed inset-x-0 top-0 z-[10] h-fit border-zinc-300 bg-zinc-100 py-2">

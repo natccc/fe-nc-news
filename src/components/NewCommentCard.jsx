@@ -39,7 +39,7 @@ const NewCommentCard = (props) => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <textarea
           type="text"
-          disabled={status === "posting"}
+          disabled={status === "posting"||username==="guest"}
           required
           rows={3}
           className=" mx-2 block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -55,7 +55,7 @@ const NewCommentCard = (props) => {
             type="button"
             className="mr-3"
             variant={"subtle"}
-            disabled={status === "posting"}
+            disabled={status === "posting" || input === ""}
 
             onClick={(e) => {
               setInput("");
@@ -63,7 +63,7 @@ const NewCommentCard = (props) => {
           >
             Cancel
           </Button>
-          <Button className="bg-red-800 hover:bg-red-900 " type="submit" disabled={status === "posting"}
+          <Button className="bg-red-800 hover:bg-red-900 " type="submit" disabled={status === "posting"|| input === ""}
 >
             Post
           </Button>
@@ -72,6 +72,7 @@ const NewCommentCard = (props) => {
         </div>
         {showModal && <SuccessUpload message="Successfully posted" setShowModal={setShowModal} />}
         {status === "error" && <ErrorMsg />}
+        {username==="guest" && <p className="text-red-800 text-sm">You need to login to post a comment</p>}
 
     
       </form>

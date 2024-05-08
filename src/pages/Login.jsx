@@ -29,6 +29,11 @@ const Login = () => {
     );
   };
 
+  const handleLogout = () => {
+    setUsername("guest");
+    setAvatarUrl("https://kawaii-avatar.now.sh/api/avatar");
+  };
+
   if (error) return <Error></Error>;
   return (
     <div>
@@ -61,14 +66,21 @@ const Login = () => {
       </ul>
 
       <p className="mt-5 text-center text-lg font-bold">
-        You're now logged in as <em>{username}</em>
+        You're now logged in as <em className="text-red-900">{username}</em>
       </p>
 
-      <Link to="/">
-        <div className="mt-12 flex justify-center">
-          <Button>Go back home</Button>
-        </div>
-      </Link>
+      <div className="mt-12 flex justify-center gap-3">
+        <Link to="/">
+          <Button>Go back home</Button>{" "}
+        </Link>
+
+        <Button
+          className={username === "guest" ? "hidden" : ""}
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      </div>
     </div>
   );
 };
