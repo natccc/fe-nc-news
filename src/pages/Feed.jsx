@@ -64,13 +64,13 @@ const Feed = () => {
           </div>
         }
         endMessage={
-          <p style={{ textAlign: "center" }}>
+          <p className="text-center my-8 text-gray-600 font-thin ">
             <b>Yay! You have seen it all</b>
           </p>
         }
       >
         <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
-          <select name="sort_by" id="" onChange={(e) => handleSort(e)}>
+          <select className="my-2 mx-1" name="sort_by" id="" onChange={(e) => handleSort(e)}>
             <option value="created_at">Date</option>
             <option value="votes">Votes</option>
             <option value="comment_count">Comments</option>
@@ -79,7 +79,7 @@ const Feed = () => {
             <option value="desc">Descending</option>
             <option value="asc">Ascending</option>
           </select>
-          <h1 className="m-2 text-2xl font-bold capitalize text-gray-900">
+          <h1 className="mx-2 my-4 text-3xl font-bold capitalize text-gray-900">
             {pageTitle}
           </h1>
           <ul className="md:space-y-3">
