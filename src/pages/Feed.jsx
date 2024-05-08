@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { getArticles, fetchArticles } from "../lib/api";
 import { useParams, useNavigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
+import Loading from "../components/Loading"
 
 const Feed = () => {
   const [sortBy, setSortBy] = useState("created_at");
@@ -65,12 +66,13 @@ const Feed = () => {
   return (
     <>
       <InfiniteScroll
+        style={{ overflow: 'hidden' }}
         dataLength={articles.length}
         next={fetchData}
         hasMore={hasMore}
         loader={
           <div className="articles-center flex justify-center">
-            <Loader className="text-gray-700" />
+            <Loading></Loading>
           </div>
         }
         endMessage={
@@ -82,15 +84,15 @@ const Feed = () => {
         <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
           <select
             className="mx-1 my-2"
-            name="sort_by"
-            id=""
+            name="sort"
+            id="sort"
             onChange={(e) => handleSort(e)}
           >
             <option value="created_at">Date</option>
             <option value="votes">Votes</option>
             <option value="comment_count">Comments</option>
           </select>
-          <select name="order_by" id="" onChange={(e) => handleOrder(e)}>
+          <select name="order" id="order" onChange={(e) => handleOrder(e)}>
             <option value="desc">Descending</option>
             <option value="asc">Ascending</option>
           </select>

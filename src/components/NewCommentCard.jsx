@@ -7,7 +7,7 @@ import ErrorMsg from "./ErrorMsg";
 const NewCommentCard = (props) => {
   const { article_id, setComments } = props;
   const [input, setInput] = useState("");
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
   const user= "jessjelly"
 
@@ -28,6 +28,12 @@ const NewCommentCard = (props) => {
       });
   };
 
+  if(showModal===true){
+    setTimeout(() => {
+      setShowModal(false);
+    },"3000")
+  }
+
   return (
     <div className="rounded-xl border bg-white p-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-600">
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -43,24 +49,31 @@ const NewCommentCard = (props) => {
           onChange={(e) => setInput(e.target.value)}
         ></textarea>
         <div className="text-right">
+          
           {" "}
           <Button
             type="button"
             className="mr-3"
             variant={"subtle"}
+            disabled={status === "posting"}
+
             onClick={(e) => {
               setInput("");
             }}
           >
             Cancel
           </Button>
-          <Button className="bg-red-800 hover:bg-red-900 " type="submit">
+          <Button className="bg-red-800 hover:bg-red-900 " type="submit" disabled={status === "posting"}
+>
             Post
           </Button>
+          {status === "posting" && <p className="mr-2 mt-2">Posting...</p>}
+
         </div>
         {showModal && <SuccessUpload message="Successfully posted" setShowModal={setShowModal} />}
         {status === "error" && <ErrorMsg />}
-        {status === "posting" && <p>Posting...</p>}
+
+    
       </form>
     </div>
   );
