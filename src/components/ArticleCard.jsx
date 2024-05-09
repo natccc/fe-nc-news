@@ -3,9 +3,20 @@ import { formatDateToNow } from "../lib/utils";
 import { Link } from "react-router-dom";
 import ArticleVoteBtn from "./ArticleVoteBtn";
 import CommentVoteBtn from "./CommentVoteBtn";
+import { useNavigate } from "react-router-dom";
 
 const ArticleCard = (props) => {
   const { article, setArticle } = props;
+  const navigate = useNavigate();
+  const handleTopicClick = (e) => {
+    e.preventDefault();
+    navigate(`/t/${article.topic}`);
+  };
+
+  const handleUserClick = (e) => {
+    e.preventDefault();
+    navigate(`/profile/${article.author}`);
+  };
 
   return (
     <Link to={`/articles/${article.article_id}`}>
@@ -13,10 +24,20 @@ const ArticleCard = (props) => {
       <article className="border-t-2  ">
         <div className="hover:bg-light_gray p-2 hover:rounded-xl ">
           <div className="flex items-center gap-3">
-            <p className="text-sm font-semibold text-gray-800">
-              {article.topic}
+            <p
+              onClick={(e) => handleTopicClick(e)}
+              className="text-sm font-semibold text-gray-800 hover:text-blue-700"
+            >
+              t/{article.topic}
             </p>
-            <p className="text-sm text-gray-700">{article.author}</p>
+
+            <p
+              onClick={(e) => handleUserClick(e)}
+              className="text-sm text-gray-700 hover:text-blue-700"
+            >
+              {article.author}
+            </p>
+
             <span className="text-xs font-extralight text-gray-400">•</span>
             <p className="text-sm text-gray-400 ">
               {article.created_at ? formatDateToNow(article.created_at) : ""}

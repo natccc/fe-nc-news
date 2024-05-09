@@ -29,7 +29,7 @@ const Feed = () => {
         setError(err);
       }
     })();
-  }, [sortBy, orderBy]);
+  }, [sortBy, orderBy, topic]);
   const fetchData = async () => {
     const articlesFromServer = await fetchArticles(
       page,

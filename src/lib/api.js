@@ -56,8 +56,11 @@ const getUsers = ()=>{
   return myApi.get(`/users`).then((res)=>{
     return res.data.users
   })
-
 }
+const getUser = (username)=>{
+  return myApi.get(`/users/${username}`).then((res)=>{
+    return res.data.user
+  })}
 
 export {
   getArticles,
@@ -68,5 +71,6 @@ export {
   postComment,
   deleteComment,
   getTopics,
-  getUsers
+  getUsers,
+  getUser
 };

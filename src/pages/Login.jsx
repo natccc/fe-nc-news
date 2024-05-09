@@ -40,12 +40,12 @@ const Login = () => {
       <p className="pt-10 text-center text-2xl font-bold text-gray-700 ">
         Select a profile
       </p>
-      <ul className="grid-cols container mt-10 grid items-center gap-y-2 md:grid-cols-3  ">
+      <ul className="grid-cols container mt-10 grid items-center gap-y-3 md:grid-cols-3  ">
         {usersData.map((user) => {
           return (
             <li
               key={user.username}
-              className="mx-auto rounded-xl border text-center hover:shadow-md"
+              className="mx-auto rounded-xl text-center border-2 hover:shadow-md "
               value={user.username}
               onClick={(e) => handleClick(e)}
             >
@@ -53,7 +53,7 @@ const Login = () => {
                 <div className=" p-4">
                   <img
                     src={user.avatar_url}
-                    className="mx-auto w-[60vw] md:w-24"
+                    className="mx-auto h-48 w-48  rounded-full border-2 border-gray-200 object-contain md:h-28 md:w-28 bg-white"
                     alt="avatar"
                   />
                   <p className="mt-4 font-bold">{user.username}</p>
@@ -65,7 +65,7 @@ const Login = () => {
         })}
       </ul>
 
-      <p className="mt-5 text-center text-lg font-bold">
+      <p className="mt-7 text-center text-lg font-bold">
         You're now logged in as <em className="text-red-900">{username}</em>
       </p>
 
@@ -75,7 +75,9 @@ const Login = () => {
         </Link>
 
         <Button
-          className={username === "guest" ? "hidden" : ""}
+          className={
+            username === "guest" ? "hidden" : "bg-red-900 hover:bg-red-800"
+          }
           onClick={handleLogout}
         >
           Logout

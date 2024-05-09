@@ -16,7 +16,7 @@ const Navbar = () => {
           <img
             src={logo}
             alt="news icon"
-            className="h-8 w-8 sm:h-6 sm:w-6"
+            className="h-8 w-8 object-contain sm:h-6 sm:w-6"
           ></img>
           <p className="hidden text-lg font-medium text-zinc-700 md:block">
             NC News
@@ -41,7 +41,7 @@ const Navbar = () => {
           <Link to={`/login`}>
             <img
               src={avatarUrl}
-              className="border-gray-300-100 w-8 rounded-full border-2 border-solid hover:bg-gray-200"
+              className="border-gray-300-100 h-10 w-10 object-contain rounded-full border-2 border-solid hover:bg-gray-200"
               alt="avatar"
             />
           </Link>
