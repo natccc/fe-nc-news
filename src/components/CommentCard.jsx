@@ -4,6 +4,8 @@ import { Button } from "./Button";
 import { useState, useContext } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline"; 
 import { UserContext } from "../contexts/User";
+
+
 const CommentCard = (props) => {
   const {comment, setComments}= props
   const { username } = useContext(UserContext);
@@ -24,7 +26,7 @@ const handleDelete = () => {
 
   return (
     <div className="border-2 p-2 m-1 pt-1 rounded-md ">
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 m-1">
         <p className="text-sm font-semibold text-gray-800">{comment.author}</p>
         <span className="text-xs font-extralight text-gray-400">•</span>
         <p className="text-xs text-gray-500 ">
@@ -32,7 +34,7 @@ const handleDelete = () => {
         </p>
       </div>
       <div>
-        <p className="text-sm text-gray-700">{comment.body}</p>
+        <p className="text-sm m-1 text-gray-700">{comment.body}</p>
       </div>
 
       <div className="flex items-center gap-4 rounded-md">
