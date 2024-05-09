@@ -50,7 +50,7 @@ const NewCommentCard = (props) => {
   return (
     <div
       id="comment"
-      className="rounded-xl border bg-white p-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-600 "
+      className="rounded-xl border bg-white p-2 mx-1 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-500 "
     >
       <form onSubmit={(e) => handleSubmit(e)}>
         <textarea
@@ -59,7 +59,7 @@ const NewCommentCard = (props) => {
           disabled={status === "posting" || username === "guest"}
           required
           rows={3}
-          className=" mx-1 block w-full resize-none border-0 bg-transparent p-1 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  className=" mx-1 block  resize-none border-0 bg-transparent p-1 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
           placeholder="Add your comment..."
           border="hidden"
           value={input}

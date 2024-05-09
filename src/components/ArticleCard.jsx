@@ -1,14 +1,19 @@
-import React from "react";
+import {useContext, useState} from "react";
 import { formatDateToNow } from "../lib/utils";
-import { Link } from "react-router-dom";
 import ArticleVoteBtn from "./ArticleVoteBtn";
 import CommentCount from "./CommentCount";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { UserContext } from "../contexts/User";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { deleteArticle } from "../lib/api";
 
 const ArticleCard = (props) => {
+  const { username } = useContext(UserContext);
   const { article, setArticle } = props;
   const navigate = useNavigate();
+  const [status, setStatus] = useState(null);
+  const params = useParams();
 
   const handleArticleClick = (e) => {
     navigate(`/articles/${article.article_id}`);
@@ -30,6 +35,23 @@ const ArticleCard = (props) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
   };
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+    setStatus("deleting");
+    deleteArticle(article.article_id)
+      .then(() => {
+        setStatus("deleted");
+        setTimeout(() => {
+          navigate("/")
+        }, "2000");
+      
+      })
+      .catch(() => {
+        setStatus("error");
+      });
+  }
 
   return (
     <article
@@ -77,11 +99,11 @@ const ArticleCard = (props) => {
         <div className="mt-2  object-contain overflow-hidden  ">
           <img
             src={article.article_img_url}
-            className="rounded-xl  mx-auto "
+            className="rounded-lg  mx-auto "
           />
         </div>
 
-        <div className="mt-3 flex items-center gap-4">
+        <div className="mt-3 flex items-center gap-3">
           <div onClick={(e) => handleVoteClick(e)}>
             <ArticleVoteBtn article={article} />
           </div>
@@ -89,6 +111,27 @@ const ArticleCard = (props) => {
             {" "}
             <CommentCount comment_count={article.comment_count} />
           </HashLink>
+
+          {/* delete button */}
+          {article.author === username && params.article_id!==undefined && (
+          <button
+            onClick={e=>handleDelete(e)}
+            className=" h-7 rounded-md border px-2 transition-colors hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
+          >
+            {" "}
+            <TrashIcon
+              aria-label="delete comment"
+              className="w-4 text-gray-700 "
+            ></TrashIcon>
+          </button>
+        )}
+        {status === "deleting" && <p className="">Deleting...</p>}
+        {status === "deleted" && <p className="">Successfully deleted</p>}
+        {status === "error" && (
+          <p className="">Error. Please try again later.</p>
+        )}
+
+          
         </div>
       </div>
     </article>

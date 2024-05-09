@@ -76,6 +76,10 @@ const getUser = (username)=>{
     return myApi.post(`/articles`, reqBody)
   }
 
+  const deleteArticle = (article_id)=>{
+    return myApi.delete(`/articles/${article_id}`)
+  }
+
 
 export {
   getArticles,
@@ -90,5 +94,6 @@ export {
   getUser,
   getArticlesByUser,
   patchComment
-  ,postArticle
+  ,postArticle,
+  deleteArticle
 };

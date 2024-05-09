@@ -52,7 +52,6 @@ const Article = ({}) => {
     <Loading />
   ) : (
     <>
-   
         <div className="hidden md:block md:absolute md:ml-12 md:mt-11 md:hover:cursor-pointer" onClick={handleBackButtonClick}>
           <CircleArrowLeft className="size-10 rounded-full stroke-gray-400 hover:bg-gray-100" />
         </div>

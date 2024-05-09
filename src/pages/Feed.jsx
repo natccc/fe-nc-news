@@ -85,7 +85,7 @@ const Feed = () => {
           </p>
         }
       >
-        <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
+        <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-80">
           <select
             className="mx-1 my-2"
             name="sort"
@@ -103,7 +103,7 @@ const Feed = () => {
           <h1 className="mx-2 my-4 text-3xl font-bold capitalize text-gray-900">
             {pageTitle}
           </h1>
-          <ul className="md:space-y-3">
+          <ul className="">
             {articles.map((article) => {
               return <ArticleCard article={article} key={article.article_id} />;
             })}
