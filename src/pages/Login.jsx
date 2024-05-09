@@ -40,12 +40,12 @@ const Login = () => {
       <p className="pt-10 text-center text-2xl font-bold text-gray-700 ">
         Select a profile
       </p>
-      <ul className="grid-cols container mt-10 grid items-center gap-y-3 md:grid-cols-3  ">
+      <ul className="grid-cols container mt-10 grid items-center gap-y-3 md:grid-cols-3   ">
         {usersData.map((user) => {
           return (
             <li
               key={user.username}
-              className="mx-auto rounded-xl text-center border-2 hover:shadow-md "
+              className={`mx-auto rounded-xl text-center border-2 hover:shadow-md hover:bg-gray-100 ${user.username === username ? "border-red-600" : "border-gray-200"}`}
               value={user.username}
               onClick={(e) => handleClick(e)}
             >

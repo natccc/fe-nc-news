@@ -46,6 +46,10 @@ const postComment = (article_id, reqBody) => {
 const deleteComment = (comment_id) => {
   return myApi.delete(`/comments/${comment_id}`);
 };
+
+const patchComment = (comment_id, vote) => {
+  return myApi.patch(`/comments/${comment_id}`, { inc_votes: `${vote}` });
+};
 const getTopics = () => {
   return myApi.get(`/topics`).then((res) => {
     return res.data.topics;
@@ -80,5 +84,6 @@ export {
   getTopics,
   getUsers,
   getUser,
-  getArticlesByUser
+  getArticlesByUser,
+  patchComment
 };

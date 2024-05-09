@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { avatarUrl } = useContext(UserContext);
+  const { username, avatarUrl } = useContext(UserContext);
   const handleHomeClick = (e) => {
     navigate(`/`);
   };
@@ -40,6 +40,11 @@ const Navbar = () => {
             <Plus className="mr-1 size-4" />
             <p>Create</p>
           </Link>
+
+          <Link to={`/user/${username}`} className={cn(buttonVariants({ variant: "outline" }))}>
+            <p>My profile</p>{" "}
+          </Link>
+
           <Link to={`/login`}>
             <img
               src={avatarUrl}

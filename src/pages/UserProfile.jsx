@@ -48,7 +48,7 @@ const UserProfile = () => {
         ></img>
         <div>
           <h1 className="text-3xl font-bold">{userInfo.name}</h1>
-          <h2 className="mt-1 text-gray-500 font-semibold"> {username}</h2>
+          <h2 className="mt-1 text-gray-500 font-semibold"> u/{username}</h2>
         </div>
       </div>
 
