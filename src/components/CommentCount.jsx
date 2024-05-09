@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from './Button'
-const CommentVoteBtn = ({comment_count}) => {
+const CommentCount = ({comment_count}) => {
   return (
     <Button variant="subtle" className="bg-[#EAEDEF] p-1 ">
     {" "}
@@ -23,4 +23,4 @@ const CommentVoteBtn = ({comment_count}) => {
   )
 }
 
-export default CommentVoteBtn
+export default CommentCount

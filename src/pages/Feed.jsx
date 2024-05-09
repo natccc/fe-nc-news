@@ -6,8 +6,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { getArticles, fetchArticles } from "../lib/api";
 import { useParams, useNavigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
-import Loading from "../components/Loading"
-
+import Loading from "../components/Loading";
+import { HashLink } from "react-router-hash-link";
 const Feed = () => {
   const [sortBy, setSortBy] = useState("created_at");
   const [orderBy, setOrderBy] = useState("desc");
@@ -58,15 +58,19 @@ const Feed = () => {
       : navigate(`?sort=${sortBy}&order=${e.target.value}`);
   };
 
- if(error){
-  return <Error code={error.response.status} message= {error.response.data.message}></Error>
- } 
-
+  if (error) {
+    return (
+      <Error
+        code={error.response.status}
+        message={error.response.data.message}
+      ></Error>
+    );
+  }
 
   return (
     <>
       <InfiniteScroll
-        style={{ overflow: 'hidden' }}
+        style={{ overflow: "hidden" }}
         dataLength={articles.length}
         next={fetchData}
         hasMore={hasMore}
@@ -104,9 +108,12 @@ const Feed = () => {
               return <ArticleCard article={article} key={article.article_id} />;
             })}
           </ul>{" "}
-        
-        </div>
-      </InfiniteScroll>
+        </div>   
+        {/* <HashLink smooth to="#top">
+        <p className="mb-4 text-center text-blue-700 hover:text-blue-800">Scroll to top</p>
+      </HashLink> */}
+      </InfiniteScroll>{" "}
+   
     </>
   );
 };

@@ -8,6 +8,7 @@ import { getArticle, getComments } from "../lib/api";
 import Loading from "../components/Loading";
 import CommentCard from "../components/CommentCard";
 import NewCommentCard from "../components/NewCommentCard";
+import { useNavigate } from "react-router-dom";
 
 const Article = ({}) => {
   const params = useParams();
@@ -15,6 +16,10 @@ const Article = ({}) => {
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+ const handleBackButtonClick= () => {
+  navigate(-1)
+ }
 
   useEffect(() => {
     (async () => {
@@ -47,11 +52,11 @@ const Article = ({}) => {
     <Loading />
   ) : (
     <>
-      <Link to={"/all"}>
-        <div className="absolute ml-12 mt-11">
+   
+        <div className="absolute ml-12 mt-11 hover:cursor-pointer" onClick={handleBackButtonClick}>
           <CircleArrowLeft className="size-10 rounded-full stroke-gray-400 hover:bg-gray-100" />
         </div>
-      </Link>
+ 
       <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
         <ArticleCard article={article} />
         <NewCommentCard article_id={article.article_id} setComments={setComments}/>
