@@ -6,7 +6,8 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import TopicsList from "./pages/TopicsList";
 import Profile from "./pages/UserProfile";
-Profile
+import CreatePost from "./pages/CreatePost";
+
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
         <Route path="/articles/:article_id" element={<Article />} />
         <Route path="/t" element={<TopicsList />} />
         <Route path="/t/:topic" element={<Feed />} />
+        <Route path="/submit" element={<CreatePost />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </>

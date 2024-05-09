@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { postComment } from "../lib/api";
 import { Button } from "./Button";
-import SuccessUpload from "./SuccessBox";
+import SuccessBox from "./SuccessBox";
 import ErrorMsg from "./ErrorMsg";
 import { UserContext } from "../contexts/User";
 import data from "@emoji-mart/data";
@@ -115,7 +115,7 @@ const NewCommentCard = (props) => {
           </div>
         </div>
         {showModal && (
-          <SuccessUpload
+          <SuccessBox
             message="Successfully posted"
             setShowModal={setShowModal}
           />
@@ -123,7 +123,7 @@ const NewCommentCard = (props) => {
         {status === "error" && <ErrorMsg />}
         {username === "guest" && (
           <p className="text-sm text-red-800">
-            You need to login to post a comment
+            You need to login to post a comment.
           </p>
         )}
       </form>

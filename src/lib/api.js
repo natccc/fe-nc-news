@@ -72,6 +72,10 @@ const getUser = (username)=>{
     })
   }
 
+  const postArticle= (reqBody)=>{
+    return myApi.post(`/articles`, reqBody)
+  }
+
 
 export {
   getArticles,
@@ -86,4 +90,5 @@ export {
   getUser,
   getArticlesByUser,
   patchComment
+  ,postArticle
 };

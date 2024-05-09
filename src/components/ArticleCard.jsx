@@ -74,10 +74,10 @@ const ArticleCard = (props) => {
           ""
         )}
 
-        <div className="mt-2">
+        <div className="mt-2  object-contain overflow-hidden  ">
           <img
             src={article.article_img_url}
-            className="h-full w-full rounded-xl object-cover "
+            className="rounded-xl  mx-auto "
           />
         </div>
 

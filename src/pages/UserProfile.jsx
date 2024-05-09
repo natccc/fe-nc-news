@@ -10,8 +10,7 @@ const UserProfile = () => {
   const [userInfo, setUserInfo] = useState({});
   const [error, setError] = useState(null);
   const [articles, setArticles] = useState([]);
-  console.log(articles);
-  console.log(username);
+
 
   useEffect(() => {
     (async () => {

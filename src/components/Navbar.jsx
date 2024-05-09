@@ -34,7 +34,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            to="/post"
+            to="/submit"
             className={cn(buttonVariants({ variant: "outline" }))}
           >
             <Plus className="mr-1 size-4" />
