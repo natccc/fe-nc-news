@@ -12,7 +12,6 @@ const Navbar = () => {
   const { avatarUrl } = useContext(UserContext);
   const handleHomeClick = (e) => {
     navigate(`/`);
-    navigate(0);
   };
 
   return (

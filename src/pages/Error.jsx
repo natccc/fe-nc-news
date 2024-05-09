@@ -18,7 +18,7 @@ const Error = ({message, code}) => {
           Sorry, we couldn’t find the page you’re looking for.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Button onClick={handleClick}>Back</Button>
+            <Button onClick={handleClick}>Go back home</Button>
           
         </div>
       </div>
