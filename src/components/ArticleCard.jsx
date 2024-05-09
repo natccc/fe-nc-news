@@ -10,24 +10,26 @@ const ArticleCard = (props) => {
   const { article, setArticle } = props;
   const navigate = useNavigate();
 
-   const handleArticleClick = (e) => {
+  const handleArticleClick = (e) => {
     navigate(`/articles/${article.article_id}`);
-  };  
-  
+  };
+
   const handleTopicClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
     navigate(`/t/${article.topic}`);
   };
 
-  
   const handleUserClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-        navigate(`/profile/${article.author}`);
+    navigate(`/profile/${article.author}`);
   };
 
- 
+  const handleVoteClick = (e) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+  };
 
   return (
     <article
@@ -80,7 +82,9 @@ const ArticleCard = (props) => {
         </div>
 
         <div className="mt-3 flex items-center gap-4">
-          <ArticleVoteBtn article={article} />
+          <div onClick={(e) => handleVoteClick(e)}>
+            <ArticleVoteBtn article={article} />
+          </div>
           <HashLink smooth to={`/articles/${article.article_id}/#comment`}>
             {" "}
             <CommentCount comment_count={article.comment_count} />
