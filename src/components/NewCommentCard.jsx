@@ -59,7 +59,7 @@ const NewCommentCard = (props) => {
           disabled={status === "posting" || username === "guest"}
           required
           rows={3}
-          className=" mx-2 block w-full resize-none border-0 bg-transparent p-1 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+          className=" mx-1 block w-full resize-none border-0 bg-transparent p-1 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
           placeholder="Add your comment..."
           border="hidden"
           value={input}

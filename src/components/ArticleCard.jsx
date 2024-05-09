@@ -23,7 +23,7 @@ const ArticleCard = (props) => {
   const handleUserClick = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    navigate(`/profile/${article.author}`);
+    navigate(`/user/${article.author}`);
   };
 
   const handleVoteClick = (e) => {

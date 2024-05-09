@@ -5,7 +5,7 @@ import Error from "./pages/Error";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import TopicsList from "./pages/TopicsList";
-import Profile from "./pages/Profile";
+import Profile from "./pages/UserProfile";
 Profile
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route path="/home" element={<Feed />} />
         <Route path="/all" element={<Feed />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/user/:username" element={<Profile />} />
         <Route path="/articles/:article_id" element={<Article />} />
         <Route path="/t" element={<TopicsList />} />
         <Route path="/t/:topic" element={<Feed />} />
