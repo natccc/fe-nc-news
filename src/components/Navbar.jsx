@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed inset-x-0 top-0 z-[10] h-fit border-zinc-300 bg-zinc-100 py-2 border ">
+    <div className="fixed inset-x-0 top-0 z-[10] h-fit border border-zinc-300 bg-zinc-100 py-2 ">
       <div className="container mx-auto flex h-full  items-center justify-between gap-2 ">
         <div
           className="flex items-center gap-2 hover:cursor-pointer"
@@ -43,26 +43,26 @@ const Navbar = () => {
             <p>Create</p>
           </Link>
 
-          <Link
-            to={`/user/${currentUser}`}
-            className={cn(buttonVariants({ variant: "outline" }))}
-          >
-            <p>My profile</p>{" "}
-          </Link>
+          {currentUser !== "guest" && (
+            <Link
+              to={`/user/${currentUser}`}
+              className={cn(buttonVariants({ variant: "outline" }))}
+            >
+              <p>My profile</p>{" "}
+            </Link>
+          )}
 
-          <Link to={`/users`}>
-            <div className="flex items-center">
-              <p> {currentUser === "guest" ? "Login" : ""}</p>
-
-              {currentUser !== "guest" && (
-                <img
-                  src={avatarUrl}
-                  className="border-gray-300-100 h-10 w-10 rounded-full border-2 border-solid object-contain hover:bg-gray-200"
-                  alt="avatar"
-                />
-              )}
-            </div>
-          </Link>
+          {currentUser === "guest" ? (
+            <Button>Login</Button>
+          ) : (
+            <Link to={`/users`}>
+              <img
+                src={avatarUrl}
+                className="border-gray-300-100 h-10 w-10 rounded-full border-2 border-solid object-contain hover:bg-gray-200"
+                alt="avatar"
+              />
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -61,7 +61,7 @@ const ArticleCard = (props) => {
 
   return (
     <article
-      className="border-t-2 hover:cursor-pointer md:max-w-[40vw]"
+      className="border-t-2 hover:cursor-pointer"
       onClick={(e) => handleArticleClick(e)}
     >
       <div className="hover:bg-light_gray p-2 hover:rounded-xl ">
@@ -105,7 +105,7 @@ const ArticleCard = (props) => {
         <div className="mt-2  object-contain overflow-hidden  ">
           <img
             src={article.article_img_url}
-            className="rounded-lg  mx-auto md:max-h-[40vh] "
+            className="rounded-lg w-full mx-auto md:max-h-[40vh] "
           />
         </div>
 

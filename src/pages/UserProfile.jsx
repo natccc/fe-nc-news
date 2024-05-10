@@ -11,7 +11,6 @@ const UserProfile = () => {
   const [error, setError] = useState(null);
   const [articles, setArticles] = useState([]);
 
-
   useEffect(() => {
     (async () => {
       try {
@@ -31,14 +30,12 @@ const UserProfile = () => {
       } catch {
         setError(true);
       }
-    })(),
-      [];
-  });
+    })()},[]);
 
   if (error) return <Error></Error>;
 
   return (
-    <div className="container mx-auto mt-8 flex flex-col gap-2">
+    <div className="container mx-auto p-4 mt-8 flex flex-col gap-2">
       <div className="flex gap-6 items-center mt-2">
         <img
           src={userInfo.avatar_url}
@@ -51,10 +48,10 @@ const UserProfile = () => {
         </div>
       </div>
 
-      <span className=" text-lg mt-5 mb-2 mx-2 font-bold border w-max py-2 px-6 rounded-3xl bg-gray-200 ">Posts</span>
-        <ul className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+      <span className=" text-lg mt-5  mb-2  font-bold border w-max py-2 px-6 rounded-2xl bg-gray-200 ">Posts</span>
+        <ul className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 ">
           {articles.map((article) => {
-            return <li className=""><ArticleCard article={article} key={article.article_id}/></li>;
+            return <li key={article.article_id}><ArticleCard article={article} /></li>;
           })}
         </ul>{" "}
 

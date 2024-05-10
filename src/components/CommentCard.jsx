@@ -54,8 +54,10 @@ const CommentCard = (props) => {
   };
 
   return (
-    <div className="m-1 rounded-md border-2 p-2 pt-1 ">
-      <div className="m-1 flex items-center gap-1">
+    <div className=" rounded-md border-2 p-2  shadow-sm ">
+      <div className="">
+
+        <div className="flex items-center gap-2 my-1">
         <p
           className="text-sm font-semibold text-gray-800 hover:cursor-pointer hover:text-blue-800"
           onClick={handleAuthorClick}
@@ -68,11 +70,11 @@ const CommentCard = (props) => {
         </p>
       </div>
       <div>
-        <p className="m-1 text-sm text-gray-700">{comment.body}</p>
+        <p className=" text-sm text-gray-700">{comment.body}</p>
       </div>
 
-      <div className="flex items-center gap-4 rounded-md">
-        <div className="flex h-10 w-24 items-center justify-between gap-1   px-1 ">
+      <div className="flex items-center gap-3 mt-3 rounded-md ">
+        <div className="flex h-8 w-20 items-center justify-between  ">
           <button
             onClick={(e) => {
               voteChange === 1 ? handleVote(-1) : handleVote(1);
@@ -118,12 +120,12 @@ const CommentCard = (props) => {
         {comment.author === currentUser && (
           <button
             onClick={handleDelete}
-            className=" h-7 rounded-md border px-2 transition-colors hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
+            className=" h-8 rounded-md border px-2 transition-colors hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
           >
             {" "}
             <TrashIcon
               aria-label="delete comment"
-              className="w-4 text-gray-700 "
+              className="w-4  text-gray-700 "
             ></TrashIcon>
           </button>
         
@@ -135,6 +137,8 @@ const CommentCard = (props) => {
           <p className="">Error. Please try again later.</p>
         )}
       </div>
+      </div>
+      
     </div>
   );
 };

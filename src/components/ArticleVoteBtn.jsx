@@ -22,7 +22,7 @@ const ArticleVoteBtn = (props) => {
           onClick={(e) => {
             voteChange === 1 ? handleVote(-1) : handleVote(1);
           }}
-          className="inline-flex items-center justify-center rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-900 transition-colors active:scale-95 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2  "
+          className="inline-flex items-center justify-center rounded-full  text-zinc-900 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900 "
         >
           <svg
             className={`w-8 rounded-full  bg-[#EAEDEF]  hover:bg-zinc-200 hover:stroke-red-700 ${voteChange === 1 ? "stroke-red-700" : ""}`}

@@ -106,7 +106,7 @@ const Feed = () => {
        <h1 className="mx-2 my-4 text-3xl font-bold capitalize text-gray-900">
             {pageTitle}
           </h1>
-          <ul className= "grid grid-cols sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          <ul className= "grid gap-1 grid-cols sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {articles.map((article) => {
               return <ArticleCard article={article} key={article.article_id} />;
             })}
