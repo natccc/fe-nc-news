@@ -13,7 +13,7 @@ const Loading = () => {
     }, "2000")}
   },[])
   return (
-    <div className="flex flex-col gap-4 items-center justify-center text-gray-300" >
+    <div className="flex mt-8 flex-col gap-4 items-center justify-center text-gray-300" >
       
        <div
         className="text-surface inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] "
