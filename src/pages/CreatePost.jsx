@@ -11,17 +11,19 @@ import { Button } from "../components/Button";
 import data from "@emoji-mart/data";
 import SuccessBox from "../components/SuccessBox";
 import ErrorMsg from "../components/ErrorMsg";
+import { useNavigate } from "react-router";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [topics, setTopics] = useState([]);
   const [query, setQuery] = useState("");
-  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState("coding");
   const [input, setInput] = useState("");
   const [status, setStatus] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [url, setUrl] = useState();
+  const navigate = useNavigate();
 
   const { currentUser } = useContext(UserContext);
 
@@ -64,12 +66,17 @@ const CreatePost = () => {
         setStatus(null);
         setInput("");
         setShowModal(true);
+        setTimeout(()=>{
+          navigate(-1)
+        },"2000")
       })
       .catch((err) => {
         console.log(err);
         setStatus("error");
       });
   };
+
+  
 
   return (
     <div className="container flex flex-col gap-6 mx-auto max-w-[90vw] sm:max-w-[70vw] lg:max-w-[50vw]">
@@ -90,12 +97,16 @@ const CreatePost = () => {
               type="text"
               name="title"
               id="title"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              required
+              className=" block w-full rounded-md border-0 invalid:ring-red-600 py-1.5 text-gray-900 shadow-sm  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
               placeholder="Today is a beautiful day"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
+         
+        
             />
           </div>
+          
         </div>
 
         <div className="">
@@ -105,9 +116,10 @@ const CreatePost = () => {
             </Combobox.Label>
             <div className="relative mt-2">
               <Combobox.Input
-                className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                className="w-full invalid:ring-red-600 rounded-md border-0 bg-white py-1.5 pl-3 pr-10 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
                 onChange={(event) => setQuery(event.target.value)}
                 displayValue={(topic) => topic}
+                required
               />
               <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
                 <ChevronUpDownIcon
@@ -183,6 +195,26 @@ const CreatePost = () => {
           </div>
         </div>
 
+        <div className="">
+          <label
+            htmlFor="random"
+            className=" text-sm mt-2 text-gray-600"
+          >
+            No image? Generate a random one 🏞️
+          </label>
+       
+            <input
+              type="checkbox"
+              name="random"
+              id="random"
+              className=" rounded-sm mx-3 "
+              onChange={() => setUrl("https://picsum.photos/600/400")}
+            />
+        
+        </div>
+
+
+
         <div
           id="body"
           className="mt-4 rounded-xl border bg-white p-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-500 "
@@ -193,7 +225,7 @@ const CreatePost = () => {
             disabled={status === "posting" || currentUser === "guest"}
             required
             rows={3}
-            className=" mx-1 block w-full resize-none border-0 bg-transparent p-1 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            className=" invalid:ring-red-600 mx-1 block w-full resize-none border-0 bg-transparent p-1 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
             placeholder="Body"
             border="hidden"
             value={input}
