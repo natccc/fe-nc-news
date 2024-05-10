@@ -7,7 +7,7 @@ const myApi = axios.create({
 const getArticles = (topic, sortBy, orderBy) => {
   return myApi
     .get(
-      `/articles?p=1&limit=5&topic=${topic}&sort_by=${sortBy}&order=${orderBy}`,
+      `/articles?p=1&limit=8&topic=${topic}&sort_by=${sortBy}&order=${orderBy}`,
     )
     .then((res) => {
       return res.data.articles;
@@ -17,7 +17,7 @@ const getArticles = (topic, sortBy, orderBy) => {
 const fetchArticles = (page, topic, sortBy, orderBy) => {
   return myApi
     .get(
-      `/articles?p=${page}&limit=5&topic=${topic}&sort_by=${sortBy}&order=${orderBy}`,
+      `/articles?p=${page}&limit=8&topic=${topic}&sort_by=${sortBy}&order=${orderBy}`,
     )
     .then((res) => {
       return res.data.articles;

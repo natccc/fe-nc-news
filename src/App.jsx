@@ -7,6 +7,7 @@ import Users from "./pages/UsersList";
 import TopicsList from "./pages/TopicsList";
 import Profile from "./pages/UserProfile";
 import CreatePost from "./pages/CreatePost";
+import FeedCompact from"./pages/FeedCompact"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Feed />} />
         <Route path="/home" element={<Feed />} />
         <Route path="/all" element={<Feed />} />
+        <Route path="/compact" element={<FeedCompact />} />
         <Route path="/users" element={<Users />} />
         <Route path="/user/:currentUser" element={<Profile />} />
         <Route path="/articles/:article_id" element={<Article />} />

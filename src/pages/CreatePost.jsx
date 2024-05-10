@@ -28,7 +28,7 @@ const CreatePost = () => {
   useEffect(() => {
     (async () => {
       const data = await getTopics();
-      setTopics(data.map((ele) => ele.slug));
+      setTopics(data.map((ele) => ele.slug).sort());
     })();
   }, []);
 
@@ -72,17 +72,16 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container flex flex-col gap-6 mx-auto max-w-[90vw] sm:max-w-[70vw] lg:max-w-[50vw]">
       <h1 className="mt-8 text-2xl font-bold">Create post</h1>
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="mt-2 flex flex-col gap-2"
       >
-        {/* title */}
         <div className="">
           <label
             htmlFor="title"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-lg font-medium leading-6 text-gray-900"
           >
             Title
           </label>
@@ -99,10 +98,9 @@ const CreatePost = () => {
           </div>
         </div>
 
-        {/* topic box */}
         <div className="">
           <Combobox as="div" value={selectedTopic} onChange={setSelectedTopic}>
-            <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900 ">
+            <Combobox.Label className="mt-2 block text-lg font-medium leading-6 text-gray-900 ">
               Topic
             </Combobox.Label>
             <div className="relative mt-2">
@@ -127,7 +125,7 @@ const CreatePost = () => {
                       className={({ active }) =>
                         classNames(
                           "relative cursor-default select-none py-2 pl-3 pr-9",
-                          active ? "bg-gray-500 text-white" : "text-gray-900",
+                          active ? "bg-gray-200" : "",
                         )
                       }
                     >
@@ -165,11 +163,10 @@ const CreatePost = () => {
           </Combobox>
         </div>
 
-        {/* img url */}
         <div className="">
           <label
             htmlFor="url"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-lg mt-2 font-medium leading-6 text-gray-900"
           >
             Image URL
           </label>
@@ -186,10 +183,9 @@ const CreatePost = () => {
           </div>
         </div>
 
-        {/* body */}
         <div
           id="body"
-          className="mt-2 rounded-xl border bg-white p-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-500 "
+          className="mt-4 rounded-xl border bg-white p-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-500 "
         >
           <textarea
             type="text"

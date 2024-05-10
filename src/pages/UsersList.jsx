@@ -51,7 +51,7 @@ const UsersList = () => {
       <p className="pt-10 text-center text-2xl font-bold text-gray-700 ">
         Select a profile
       </p>
-      <ul className="grid-cols container mt-10 grid items-center gap-y-3 md:grid-cols-3   ">
+      <ul className="grid-cols container mx-auto mt-10 grid items-center gap-y-3 md:grid-cols-3  md:max-w-[60vw] ">
         {usersData.map((user) => {
           return (
             

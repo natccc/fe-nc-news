@@ -9,7 +9,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { deleteArticle } from "../lib/api";
 import DeleteModal from "./DeleteModal";
 
-const ArticleCard = (props) => {
+const ArticleCardCompact = (props) => {
   const { currentUser } = useContext(UserContext);
   const { article, setArticle } = props;
   const navigate = useNavigate();
@@ -61,18 +61,12 @@ const ArticleCard = (props) => {
 
   return (
     <article
-      className="border-t-2 hover:cursor-pointer md:max-w-[40vw]"
+      className="border-t-2 hover:cursor-pointer"
       onClick={(e) => handleArticleClick(e)}
     >
       <div className="hover:bg-light_gray p-2 hover:rounded-xl ">
-        <div className= "flex items-center gap-3">
-          <p
-            onClick={(e) => handleTopicClick(e)}
-            className="text-sm font-semibold text-gray-800 hover:text-blue-700"
-          >
-            t/{article.topic}
-          </p>
-
+        <div className="flex items-center gap-3">
+         
           <p
             onClick={(e) => handleUserClick(e)}
             className="text-sm text-gray-700 hover:text-blue-700"
@@ -105,7 +99,7 @@ const ArticleCard = (props) => {
         <div className="mt-2  object-contain overflow-hidden  ">
           <img
             src={article.article_img_url}
-            className="rounded-lg  mx-auto md:max-h-[40vh] "
+            className="rounded-lg  mx-auto "
           />
         </div>
 
@@ -120,6 +114,7 @@ const ArticleCard = (props) => {
 
 
 
+          {/* delete button */}
           {article.author === currentUser && params.article_id!==undefined && (
           <button
             onClick={e=>handleDelete(e)}
@@ -146,4 +141,4 @@ const ArticleCard = (props) => {
   );
 };
 
-export default ArticleCard;
+export default ArticleCardCompact;

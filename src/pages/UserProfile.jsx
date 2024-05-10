@@ -38,7 +38,7 @@ const UserProfile = () => {
   if (error) return <Error></Error>;
 
   return (
-    <div className=" container mt-8 flex flex-col gap-2">
+    <div className="container mx-auto mt-8 flex flex-col gap-2">
       <div className="flex gap-6 items-center mt-2">
         <img
           src={userInfo.avatar_url}
@@ -52,13 +52,12 @@ const UserProfile = () => {
       </div>
 
       <span className=" text-lg mt-5 mb-2 mx-2 font-bold border w-max py-2 px-6 rounded-3xl bg-gray-200 ">Posts</span>
-      <section className="">
-        <ul className="md:space-y-3">
+        <ul className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {articles.map((article) => {
-            return <ArticleCard article={article} key={article.article_id} />;
+            return <li className=""><ArticleCard article={article} key={article.article_id}/></li>;
           })}
         </ul>{" "}
-      </section>
+
     </div>
   );
 };

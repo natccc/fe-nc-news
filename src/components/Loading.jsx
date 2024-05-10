@@ -23,7 +23,7 @@ const Loading = () => {
           Loading...
         </span>
       </div>        
-      <p className="container mt-4 text-gray-800">{message}</p>
+      <p className="container m-4 text-gray-800 text-center animate-pulse">{message}</p>
     </div>
   );
 };

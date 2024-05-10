@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import ArticleCard from "../components/ArticleCard";
+import ArticleCardCompact from "../components/ArticleCardCompact";
 import Error from "./Error";
+import { Loader } from "lucide-react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getArticles, fetchArticles } from "../lib/api";
 import { useParams, useNavigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import Loading from "../components/Loading";
 import { HashLink } from "react-router-hash-link";
-import { Button } from "../components/Button";
-const Feed = () => {
+const FeedCompact = () => {
   const [sortBy, setSortBy] = useState("created_at");
   const [orderBy, setOrderBy] = useState("desc");
   const [page, setPage] = useState(2);
@@ -19,8 +19,6 @@ const Feed = () => {
   const navigate = useNavigate();
   const pageTitle = params.topic ? params.topic : "all";
   const topic = params.topic ? params.topic : "";
-
- 
 
   useEffect(() => {
     (async () => {
@@ -41,7 +39,7 @@ const Feed = () => {
     );
 
     setArticles([...articles, ...articlesFromServer]);
-    if (articlesFromServer.length === 0 || articlesFromServer.length < 8) {
+    if (articlesFromServer.length === 0 || articlesFromServer.length < 5) {
       setHasMore(false);
     }
     setPage(page + 1);
@@ -85,7 +83,7 @@ const Feed = () => {
           </p>
         }
       >
-        <div className="mx-20 pt-4">
+        <div className="mx-20">
           <select
             className="mx-1 my-2 rounded-lg"
             name="sort"
@@ -100,22 +98,21 @@ const Feed = () => {
             <option value="desc">Descending</option>
             <option value="asc">Ascending</option>
           </select>
-
-    
-
-       <h1 className="mx-2 my-4 text-3xl font-bold capitalize text-gray-900">
+          <h1 className="mx-2 my-4 text-3xl font-bold capitalize text-gray-900">
             {pageTitle}
           </h1>
-          <ul className= "grid grid-cols sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          <ul className="grid grid-cols md:grid-cols-3 lg:grid-cols-4">
             {articles.map((article) => {
-              return <ArticleCard article={article} key={article.article_id} />;
+              return <ArticleCardCompact article={article} key={article.article_id} />;
             })}
           </ul>{" "}
         </div>
- 
+        {/* <HashLink smooth to="#top">
+        <p className="mb-4 text-center text-blue-700 hover:text-blue-800">Scroll to top</p>
+      </HashLink> */}
       </InfiniteScroll>{" "}
     </>
   );
 };
 
-export default Feed;
+export default FeedCompact;
