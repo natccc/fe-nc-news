@@ -41,7 +41,7 @@ const Feed = () => {
     );
 
     setArticles([...articles, ...articlesFromServer]);
-    if (articlesFromServer.length === 0 || articlesFromServer.length < 8) {
+    if (articlesFromServer.length === 0 || articlesFromServer.length < 10) {
       setHasMore(false);
     }
     setPage(page + 1);
@@ -110,10 +110,9 @@ const Feed = () => {
             {articles.map((article) => {
               return <ArticleCard article={article} key={article.article_id} />;
             })}
-          </ul>{" "}
+          </ul>
         </div>
- 
-      </InfiniteScroll>{" "}
+      </InfiniteScroll>
     </>
   );
 };
