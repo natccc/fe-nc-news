@@ -6,6 +6,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { UserContext } from "../contexts/User";
 import { useNavigate } from "react-router";
 import { patchComment } from "../lib/api";
+import DeleteModal from "./DeleteModal";
 
 const CommentCard = (props) => {
   const { comment, setComments } = props;
@@ -13,6 +14,7 @@ const CommentCard = (props) => {
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const [voteChange, setVoteChange] = useState(0);
+  const [showModal, setShowModal]= useState(false)
   const handleVote = (vote) => {
     setVoteChange((curr) => curr + vote);
     (async () => {
@@ -26,6 +28,10 @@ const CommentCard = (props) => {
   };
 
   const handleDelete = () => {
+   setShowModal(true)
+  };
+
+  const confirmDelete=()=>{
     setStatus("deleting");
     deleteComment(comment.comment_id)
       .then(() => {
@@ -41,7 +47,7 @@ const CommentCard = (props) => {
       .catch((err) => {
         setStatus("error");
       });
-  };
+  }
 
   const handleAuthorClick = () => {
     navigate(`/user/${comment.author}`);
@@ -120,7 +126,9 @@ const CommentCard = (props) => {
               className="w-4 text-gray-700 "
             ></TrashIcon>
           </button>
-        )}
+        
+        )} 
+         {showModal && <DeleteModal content="comment" onClick={confirmDelete}></DeleteModal>}
         {status === "deleting" && <p className="">Deleting...</p>}
         {status === "deleted" && <p className="">Successfully deleted</p>}
         {status === "error" && (

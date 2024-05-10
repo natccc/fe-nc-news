@@ -7,6 +7,7 @@ import { HashLink } from "react-router-hash-link";
 import { UserContext } from "../contexts/User";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { deleteArticle } from "../lib/api";
+import DeleteModal from "./DeleteModal";
 
 const ArticleCard = (props) => {
   const { currentUser } = useContext(UserContext);
@@ -14,6 +15,7 @@ const ArticleCard = (props) => {
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const params = useParams();
+  const [showModal, setShowModal] = useState(false)
 
   const handleArticleClick = (e) => {
     navigate(`/articles/${article.article_id}`);
@@ -39,6 +41,10 @@ const ArticleCard = (props) => {
   const handleDelete = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
+    setShowModal(true)
+  }
+
+  const confirmDelete=()=>{
     setStatus("deleting");
     deleteArticle(article.article_id)
       .then(() => {
@@ -122,9 +128,10 @@ const ArticleCard = (props) => {
           >
             {" "}
             <TrashIcon
-              aria-label="delete comment"
+              aria-label="delete article"
               className="w-4 text-gray-700 "
             ></TrashIcon>
+            {showModal&& <DeleteModal content="article" onClick={confirmDelete}></DeleteModal>}
           </button>
         )}
         {status === "deleting" && <p className="">Deleting...</p>}
