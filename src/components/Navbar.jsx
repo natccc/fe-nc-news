@@ -53,7 +53,8 @@ const Navbar = () => {
           )}
 
           {currentUser === "guest" ? (
-            <Button>Login</Button>
+             <Link to={`/users`}> <Button>Login</Button></Link>
+
           ) : (
             <Link to={`/users`}>
               <img
