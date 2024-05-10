@@ -14,7 +14,7 @@ const NewCommentCard = (props) => {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const { username } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const [showEmoji, setShowEmoji] = useState(false);
 
   const addEmoji = (e) => {
@@ -27,7 +27,7 @@ const NewCommentCard = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus("posting");
-    postComment(article_id, { username: username, body: input })
+    postComment(article_id, { username: currentUser, body: input })
       .then((res) => {
         setStatus(null);
         setInput("");
@@ -56,7 +56,7 @@ const NewCommentCard = (props) => {
         <textarea
           type="text"
           onFocus={() => setShowEmoji(false)}
-          disabled={status === "posting" || username === "guest"}
+          disabled={status === "posting" || currentUser === "guest"}
           required
           rows={3}
                   className=" mx-1 block  resize-none border-0 bg-transparent p-1 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -121,7 +121,7 @@ const NewCommentCard = (props) => {
           />
         )}
         {status === "error" && <ErrorMsg />}
-        {username === "guest" && (
+        {currentUser === "guest" && (
           <p className="text-sm text-red-800">
             You need to login to post a comment.
           </p>

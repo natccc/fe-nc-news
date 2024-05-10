@@ -75,9 +75,7 @@ const Feed = () => {
         next={fetchData}
         hasMore={hasMore}
         loader={
-          <div className="articles-center flex justify-center">
             <Loading></Loading>
-          </div>
         }
         endMessage={
           <p className="my-8 text-center font-thin text-gray-600 ">
@@ -87,7 +85,7 @@ const Feed = () => {
       >
         <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-80">
           <select
-            className="mx-1 my-2"
+            className="mx-1 my-2 rounded-lg"
             name="sort"
             id="sort"
             onChange={(e) => handleSort(e)}
@@ -96,7 +94,7 @@ const Feed = () => {
             <option value="votes">Votes</option>
             <option value="comment_count">Comments</option>
           </select>
-          <select name="order" id="order" onChange={(e) => handleOrder(e)}>
+          <select name="order" id="order" onChange={(e) => handleOrder(e)} className="rounded-lg ">
             <option value="desc">Descending</option>
             <option value="asc">Ascending</option>
           </select>
@@ -108,12 +106,11 @@ const Feed = () => {
               return <ArticleCard article={article} key={article.article_id} />;
             })}
           </ul>{" "}
-        </div>   
+        </div>
         {/* <HashLink smooth to="#top">
         <p className="mb-4 text-center text-blue-700 hover:text-blue-800">Scroll to top</p>
       </HashLink> */}
       </InfiniteScroll>{" "}
-   
     </>
   );
 };

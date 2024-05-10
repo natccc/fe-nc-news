@@ -9,7 +9,7 @@ import { patchComment } from "../lib/api";
 
 const CommentCard = (props) => {
   const { comment, setComments } = props;
-  const { username } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const [voteChange, setVoteChange] = useState(0);
@@ -109,7 +109,7 @@ const CommentCard = (props) => {
           </button>
           {status==="error" && <p className="text-red-900">Error. Please try again later</p>}
         </div>
-        {comment.author === username && (
+        {comment.author === currentUser && (
           <button
             onClick={handleDelete}
             className=" h-7 rounded-md border px-2 transition-colors hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"

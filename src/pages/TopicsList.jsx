@@ -4,20 +4,14 @@ import { Link } from "react-router-dom";
 import Error from "./Error";
 const TopicsList = () => {
   const [topics, setTopics] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     (async () => {
-      try {
         const data = await getTopics();
-        setTopics(data);
-      } catch (err) {
-        setError(err);
-      }
+        setTopics(data.map((ele) => ele.slug));
     })();
   }, []);
 
-// {error && <Error></Error>}
 
   return (
     <div className="p-10 text-center  ">

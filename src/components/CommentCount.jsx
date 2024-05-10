@@ -2,11 +2,11 @@ import React from 'react'
 import { Button } from './Button'
 const CommentCount = ({comment_count}) => {
   return (
-    <Button variant="subtle" className="bg-[#EAEDEF] p-1 ">
+    <Button variant="subtle" className="bg-[#EAEDEF] p-1   ">
     {" "}
     <svg
       fill="#424242"
-      className="w-8 rounded-full border "
+      className="w-7 rounded-full  "
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-16.64 -16.64 97.28 97.28"
       xmlSpace="preserve"

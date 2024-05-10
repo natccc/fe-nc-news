@@ -56,7 +56,7 @@ const Article = ({}) => {
           <CircleArrowLeft className="size-10 rounded-full stroke-gray-400 hover:bg-gray-100" />
         </div>
  
-      <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96">
+      <div className="mx-10 pt-4 md:mx-32 md:space-y-3 lg:mx-64 xl:mx-96 pb-10">
         <ArticleCard article={article} />
         <NewCommentCard article_id={article.article_id} setComments={setComments}/>
         <div className="flex flex-col rounded-lg border p-2 ">

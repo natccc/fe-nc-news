@@ -6,7 +6,7 @@ import ArticleCard from "../components/ArticleCard";
 import { getArticlesByUser } from "../lib/api";
 
 const UserProfile = () => {
-  const { username } = useParams();
+  const { currentUser } = useParams();
   const [userInfo, setUserInfo] = useState({});
   const [error, setError] = useState(null);
   const [articles, setArticles] = useState([]);
@@ -15,7 +15,7 @@ const UserProfile = () => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getUser(username);
+        const data = await getUser(currentUser);
         setUserInfo(data);
       } catch {
         setError(true);
@@ -26,7 +26,7 @@ const UserProfile = () => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getArticlesByUser(username);
+        const data = await getArticlesByUser(currentUser);
         setArticles(data);
       } catch {
         setError(true);
@@ -47,7 +47,7 @@ const UserProfile = () => {
         ></img>
         <div>
           <h1 className="text-3xl font-bold">{userInfo.name}</h1>
-          <h2 className="mt-1 text-gray-500 font-semibold"> u/{username}</h2>
+          <h2 className="mt-1 text-gray-500 font-semibold"> u/{currentUser}</h2>
         </div>
       </div>
 

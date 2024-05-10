@@ -2,29 +2,29 @@ import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 const getInitialUsername = () => {
-  const username = localStorage.getItem("username");
-  return username ? JSON.parse(username) : "guest";
+  const currentUser = localStorage.getItem("currentUser");
+  return currentUser ? JSON.parse(currentUser) : "guest";
 };
 
 const getInitialAvatar = () => {
   const avatarUrl = localStorage.getItem("avatarUrl");
   return avatarUrl
     ? JSON.parse(avatarUrl)
-    : "https://kawaii-avatar.now.sh/api/avatar";
+    : "";
 };
 
 export const UserProvider = ({ children }) => {
-  const [username, setUsername] = useState(getInitialUsername);
+  const [currentUser, setCurrentUser] = useState(getInitialUsername);
   const [avatarUrl, setAvatarUrl] = useState(getInitialAvatar);
 
   useEffect(() => {
-    localStorage.setItem("username", JSON.stringify(username));
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
     localStorage.setItem("avatarUrl", JSON.stringify(avatarUrl));
-  }, [username, avatarUrl]);
+  }, [currentUser, avatarUrl]);
 
   return (
     <UserContext.Provider
-      value={{ username, setUsername, avatarUrl, setAvatarUrl }}
+      value={{ currentUser, setCurrentUser, avatarUrl, setAvatarUrl }}
     >
       {children}
     </UserContext.Provider>

@@ -9,7 +9,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { deleteArticle } from "../lib/api";
 
 const ArticleCard = (props) => {
-  const { username } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const { article, setArticle } = props;
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
@@ -107,13 +107,15 @@ const ArticleCard = (props) => {
           <div onClick={(e) => handleVoteClick(e)}>
             <ArticleVoteBtn article={article} />
           </div>
-          <HashLink smooth to={`/articles/${article.article_id}/#comment`}>
+          <HashLink smooth to={`/articles/${article.article_id}/#comment` }>
             {" "}
             <CommentCount comment_count={article.comment_count} />
           </HashLink>
 
+
+
           {/* delete button */}
-          {article.author === username && params.article_id!==undefined && (
+          {article.author === currentUser && params.article_id!==undefined && (
           <button
             onClick={e=>handleDelete(e)}
             className=" h-7 rounded-md border px-2 transition-colors hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"

@@ -22,7 +22,7 @@ const ArticleVoteBtn = (props) => {
           onClick={(e) => {
             voteChange === 1 ? handleVote(-1) : handleVote(1);
           }}
-          className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors active:scale-95 "
+          className="inline-flex items-center justify-center rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-900 transition-colors active:scale-95 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2  "
         >
           <svg
             className={`w-8 rounded-full  bg-[#EAEDEF]  hover:bg-zinc-200 hover:stroke-red-700 ${voteChange === 1 ? "stroke-red-700" : ""}`}
@@ -39,14 +39,14 @@ const ArticleVoteBtn = (props) => {
 
         <span className="text-sm font-semibold text-gray-800">
           {article.votes + voteChange !== 0
-            ? article.votes + voteChange
+            ? article.votes + voteChange  
             : "Vote"}
         </span>
         <button
           onClick={(e) => {
             voteChange === -1 ? handleVote(1) : handleVote(-1);
           }}
-          className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors hover:bg-zinc-200 active:scale-95"
+          className="inline-flex items-center justify-center rounded-full bg-zinc-100  text-zinc-900 transition-colors hover:bg-zinc-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 "
         >
           <svg
             className={`w-8 rotate-180 rounded-full bg-[#EAEDEF] hover:bg-zinc-200 hover:stroke-purple-700 ${voteChange === -1 ? "stroke-purple-700" : ""}`}

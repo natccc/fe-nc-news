@@ -13,7 +13,7 @@ import SuccessBox from "../components/SuccessBox";
 import ErrorMsg from "../components/ErrorMsg";
 
 const CreatePost = () => {
-    const [title, setTitle]= useState("")
+  const [title, setTitle] = useState("");
   const [topics, setTopics] = useState([]);
   const [query, setQuery] = useState("");
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -21,20 +21,14 @@ const CreatePost = () => {
   const [status, setStatus] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [url, setUrl]= useState();
+  const [url, setUrl] = useState();
 
-  const { username } = useContext(UserContext);
- 
-  const topicsData=["coding","cooking","football"]
+  const { currentUser } = useContext(UserContext);
+
   useEffect(() => {
     (async () => {
-      try {
-        const data = await getTopics();
-        setTopics(data.map((ele) => ele.slug));
-      } catch(err){
-        setTopics(topicsData)
-        setStatus(error);
-      }
+      const data = await getTopics();
+      setTopics(data.map((ele) => ele.slug));
     })();
   }, []);
 
@@ -62,7 +56,7 @@ const CreatePost = () => {
     postArticle({
       title: title,
       topic: selectedTopic,
-      author: username,
+      author: currentUser,
       body: input,
       article_img_url: url,
     })
@@ -71,139 +65,136 @@ const CreatePost = () => {
         setInput("");
         setShowModal(true);
       })
-      .catch(err => {
-        console.log(err)
+      .catch((err) => {
+        console.log(err);
         setStatus("error");
       });
   };
 
   return (
-    
     <div className="container">
-          <h1 className="mt-8 text-2xl font-bold">Create post</h1>    
-          <form onSubmit={(e) => handleSubmit(e)} className="mt-2 flex flex-col gap-2">
-     
-
-      {/* title */}
-      <div className="">
-        <label
-          htmlFor="title"
-          className="block text-sm font-medium leading-6 text-gray-900"
-        >
-          Title
-        </label>
-        <div className="mt-2 ">
-          <input
-            type="text"
-            name="title"
-            id="title"
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-            placeholder="Today is a beautiful day"
-            onChange={e=>setTitle(e.target.value)}
-            value={title}
-          />
-        </div>
-      </div>
-
-      {/* topic box */}
-      <div className="">
-        <Combobox as="div" value={selectedTopic} onChange={setSelectedTopic}>
-          <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900 ">
-            Topic
-          </Combobox.Label>
-          <div className="relative mt-2">
-            <Combobox.Input
-              className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-              onChange={(event) => setQuery(event.target.value)}
-              displayValue={(topic) => topic}
+      <h1 className="mt-8 text-2xl font-bold">Create post</h1>
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        className="mt-2 flex flex-col gap-2"
+      >
+        {/* title */}
+        <div className="">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Title
+          </label>
+          <div className="mt-2 ">
+            <input
+              type="text"
+              name="title"
+              id="title"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="Today is a beautiful day"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
             />
-            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-              <ChevronUpDownIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
+          </div>
+        </div>
+
+        {/* topic box */}
+        <div className="">
+          <Combobox as="div" value={selectedTopic} onChange={setSelectedTopic}>
+            <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900 ">
+              Topic
+            </Combobox.Label>
+            <div className="relative mt-2">
+              <Combobox.Input
+                className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                onChange={(event) => setQuery(event.target.value)}
+                displayValue={(topic) => topic}
               />
-            </Combobox.Button>
+              <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+                <ChevronUpDownIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              </Combobox.Button>
 
-            {filteredTopics.length > 0 && (
-              <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base capitalize shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {filteredTopics.map((topic) => (
-                  <Combobox.Option
-                    key={topic}
-                    value={topic}
-                    className={({ active }) =>
-                      classNames(
-                        "relative cursor-default select-none py-2 pl-3 pr-9",
-                        active ? "bg-gray-500 text-white" : "text-gray-900",
-                      )
-                    }
-                  >
-                    {({ active, selected }) => (
-                      <>
-                        <span
-                          className={classNames(
-                            "block truncate",
-                            selected && "font-semibold",
-                          )}
-                        >
-                          {topic}
-                        </span>
-
-                        {selected && (
+              {filteredTopics.length > 0 && (
+                <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base capitalize shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  {filteredTopics.map((topic) => (
+                    <Combobox.Option
+                      key={topic}
+                      value={topic}
+                      className={({ active }) =>
+                        classNames(
+                          "relative cursor-default select-none py-2 pl-3 pr-9",
+                          active ? "bg-gray-500 text-white" : "text-gray-900",
+                        )
+                      }
+                    >
+                      {({ active, selected }) => (
+                        <>
                           <span
                             className={classNames(
-                              "absolute inset-y-0 right-0 flex items-center pr-4",
-                              active ? "text-white" : "text-indigo-600",
+                              "block truncate",
+                              selected && "font-semibold",
                             )}
                           >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                            {topic}
                           </span>
-                        )}
-                      </>
-                    )}
-                  </Combobox.Option>
-                ))}
-              </Combobox.Options>
-            )}
-          </div>
-        </Combobox>
-      </div>
 
-{/* img url */}
-      <div className="">
-        <label
-          htmlFor="url"
-          className="block text-sm font-medium leading-6 text-gray-900"
-        >
-          Image URL
-        </label>
-        <div className="mt-2 ">
-          <input
-            type="text"
-            name="url"
-            id="url"
-            value={url}
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-            placeholder="https://picsum.photos/600/400"
-            onChange={e=>setUrl(e.target.value)}
-          />
+                          {selected && (
+                            <span
+                              className={classNames(
+                                "absolute inset-y-0 right-0 flex items-center pr-4",
+                                active ? "text-white" : "text-indigo-600",
+                              )}
+                            >
+                              <CheckIcon
+                                className="h-5 w-5"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Combobox.Option>
+                  ))}
+                </Combobox.Options>
+              )}
+            </div>
+          </Combobox>
         </div>
-      </div>
 
+        {/* img url */}
+        <div className="">
+          <label
+            htmlFor="url"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Image URL
+          </label>
+          <div className="mt-2 ">
+            <input
+              type="text"
+              name="url"
+              id="url"
+              value={url}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+              placeholder="https://picsum.photos/600/400"
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </div>
+        </div>
 
-
-
-
-
-{/* body */}
-      <div
-        id="body"
-        className="rounded-xl mt-2 border bg-white p-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-500 "
-      >
-   
+        {/* body */}
+        <div
+          id="body"
+          className="mt-2 rounded-xl border bg-white p-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-gray-500 "
+        >
           <textarea
             type="text"
             onFocus={() => setShowEmoji(false)}
-            disabled={status === "posting" || username === "guest"}
+            disabled={status === "posting" || currentUser === "guest"}
             required
             rows={3}
             className=" mx-1 block w-full resize-none border-0 bg-transparent p-1 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -268,11 +259,10 @@ const CreatePost = () => {
             />
           )}
           {status === "error" && <ErrorMsg />}
-          {username === "guest" && (
+          {currentUser === "guest" && (
             <p className="text-sm text-red-800">You need to login to post.</p>
           )}
-       
-      </div>
+        </div>
       </form>
     </div>
   );
