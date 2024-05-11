@@ -4,10 +4,11 @@ import Error from "./Error";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getArticles, fetchArticles } from "../lib/api";
 import { useParams, useNavigate } from "react-router-dom";
-import Dropdown from "../components/Dropdown";
+import SortByDropdown from "../components/SortByDropdown";
 import Loading from "../components/Loading";
-import { HashLink } from "react-router-hash-link";
-import { Button } from "../components/Button";
+import { Select, Option } from "@material-tailwind/react";
+import { set } from "date-fns";
+
 const Feed = () => {
   const [sortBy, setSortBy] = useState("created_at");
   const [orderBy, setOrderBy] = useState("desc");
@@ -19,8 +20,6 @@ const Feed = () => {
   const navigate = useNavigate();
   const pageTitle = params.topic ? params.topic : "all";
   const topic = params.topic ? params.topic : "";
-
- 
 
   useEffect(() => {
     (async () => {
@@ -46,12 +45,12 @@ const Feed = () => {
     }
     setPage(page + 1);
   };
-  const handleSort = (e) => {
-    setSortBy(e.target.value);
-    params.topic
-      ? navigate(`/t/${topic}?sort=${e.target.value}`)
-      : navigate(`?sort=${e.target.value}`);
-  };
+  // const handleSort = (e) => {
+  //   setSortBy(e.target.value);
+  //   params.topic
+  //     ? navigate(`/t/${topic}?sort=${e.target.value}`)
+  //     : navigate(`?sort=${e.target.value}`);
+  // };
 
   const handleOrder = (e) => {
     setOrderBy(e.target.value);
@@ -76,37 +75,39 @@ const Feed = () => {
         dataLength={articles.length}
         next={fetchData}
         hasMore={hasMore}
-        loader={
-            <Loading></Loading>
-        }
+        loader={<Loading></Loading>}
         endMessage={
           <p className="my-8 text-center font-thin text-gray-600 ">
             <b>Yay! You have seen it all</b>
           </p>
         }
       >
-        <div className="mx-20 pt-4">
-          <select
-            className="mx-1 my-2 rounded-lg"
-            name="sort"
-            id="sort"
-            onChange={(e) => handleSort(e)}
+        <div className="p-6 ">
+          <div className="flex gap-2 w-min m-2 ">
+            <Select
+            label="Sort By"
+            value={sortBy}
+              onChange={(val) => setSortBy(val)}
+            >
+              <Option value="created_at">Date</Option>
+              <Option value="votes">Votes</Option>
+              <Option value="comment_count">Comments</Option>
+            </Select>
+          
+
+          <Select
+          label="Order By"
+            value={orderBy}
+            onChange={(val) => setOrderBy(val)}
           >
-            <option value="created_at">Date</option>
-            <option value="votes">Votes</option>
-            <option value="comment_count">Comments</option>
-          </select>
-          <select name="order" id="order" onChange={(e) => handleOrder(e)} className="rounded-lg ">
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
-          </select>
-
-    
-
-       <h1 className="mx-2 my-4 text-3xl font-bold capitalize text-gray-900">
+            <Option value="desc">Descending</Option>
+            <Option value="asc">Ascending</Option>
+          </Select>
+          </div>
+          <h1 className="mx-2 my-4 text-3xl font-bold capitalize text-gray-900">
             {pageTitle}
           </h1>
-          <ul className= "grid gap-1 grid-cols sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          <ul className="grid-cols grid gap-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {articles.map((article) => {
               return <ArticleCard article={article} key={article.article_id} />;
             })}

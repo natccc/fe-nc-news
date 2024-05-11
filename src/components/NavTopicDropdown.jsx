@@ -4,12 +4,13 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import { getTopics } from "../lib/api";
 import { Link } from "react-router-dom";
-import { Button } from "./Button";
+import { buttonVariants } from "./Button";
+import { cn } from "../lib/utils";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function TopicDropdown() {
+export default function NavTopicDropdown() {
   const [topics, setTopics] = useState([]);
   useEffect(() => {
     (async () => {
@@ -21,7 +22,7 @@ export default function TopicDropdown() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="h-10 py-2 px-4 bg-zinc-100 text-zinc-900 hover:bg-zinc-200 outline outline-1 outline-zinc-300 active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 dark:focus:ring-slate-400 disabled:pointer-events-none dark:focus:ring-offset-slate-900">
+        <Menu.Button className={cn(buttonVariants({ variant: "subtle", size: "sm" }))}>
           Topics
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"

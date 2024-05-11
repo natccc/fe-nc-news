@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import { formatDateToNow } from "../lib/utils";
 import ArticleVoteBtn from "./ArticleVoteBtn";
 import CommentCount from "./CommentCount";
@@ -15,7 +15,7 @@ const ArticleCard = (props) => {
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const params = useParams();
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const handleArticleClick = (e) => {
     navigate(`/articles/${article.article_id}`);
@@ -41,31 +41,30 @@ const ArticleCard = (props) => {
   const handleDelete = (e) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
-    setShowModal(true)
-  }
+    setShowModal(true);
+  };
 
-  const confirmDelete=()=>{
+  const confirmDelete = () => {
     setStatus("deleting");
     deleteArticle(article.article_id)
       .then(() => {
         setStatus("deleted");
         setTimeout(() => {
-          navigate("/")
+          navigate("/");
         }, "2000");
-      
       })
       .catch(() => {
         setStatus("error");
       });
-  }
+  };
 
   return (
     <article
-      className="border-t-2 hover:cursor-pointer"
+      className=" rounded-lg shadow hover:cursor-pointer"
       onClick={(e) => handleArticleClick(e)}
     >
-      <div className="hover:bg-light_gray p-2 hover:rounded-xl ">
-        <div className= "flex items-center gap-3">
+      <div className="p-2 hover:rounded-xl hover:bg-light_gray ">
+        <div className="flex items-center gap-3">
           <p
             onClick={(e) => handleTopicClick(e)}
             className="text-sm font-semibold text-gray-800 hover:text-blue-700"
@@ -102,10 +101,10 @@ const ArticleCard = (props) => {
           ""
         )}
 
-        <div className="mt-2  object-contain overflow-hidden  ">
+        <div className="mt-2  overflow-hidden object-contain  ">
           <img
             src={article.article_img_url}
-            className="rounded-lg w-full mx-auto md:max-h-[40vh] "
+            className="mx-auto  rounded-lg  "
           />
         </div>
 
@@ -113,33 +112,35 @@ const ArticleCard = (props) => {
           <div onClick={(e) => handleVoteClick(e)}>
             <ArticleVoteBtn article={article} />
           </div>
-          <HashLink smooth to={`/articles/${article.article_id}/#comment` }>
+          <HashLink smooth to={`/articles/${article.article_id}/#comment`}>
             {" "}
             <CommentCount comment_count={article.comment_count} />
           </HashLink>
 
-
-
-          {article.author === currentUser && params.article_id!==undefined && (
-          <button
-            onClick={e=>handleDelete(e)}
-            className=" h-7 rounded-md border px-2 transition-colors hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
-          >
-            {" "}
-            <TrashIcon
-              aria-label="delete article"
-              className="w-4 text-gray-700 "
-            ></TrashIcon>
-            {showModal&& <DeleteModal content="article" onClick={confirmDelete}></DeleteModal>}
-          </button>
-        )}
-        {status === "deleting" && <p className="">Deleting...</p>}
-        {status === "deleted" && <p className="">Successfully deleted</p>}
-        {status === "error" && (
-          <p className="">Error. Please try again later.</p>
-        )}
-
-          
+          {article.author === currentUser &&
+            params.article_id !== undefined && (
+              <button
+                onClick={(e) => handleDelete(e)}
+                className=" h-7 rounded-md border px-2 transition-colors hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:focus:ring-slate-400 dark:focus:ring-offset-slate-900"
+              >
+                {" "}
+                <TrashIcon
+                  aria-label="delete article"
+                  className="w-4 text-gray-700 "
+                ></TrashIcon>
+                {showModal && (
+                  <DeleteModal
+                    content="article"
+                    onClick={confirmDelete}
+                  ></DeleteModal>
+                )}
+              </button>
+            )}
+          {status === "deleting" && <p className="">Deleting...</p>}
+          {status === "deleted" && <p className="">Successfully deleted</p>}
+          {status === "error" && (
+            <p className="">Error. Please try again later.</p>
+          )}
         </div>
       </div>
     </article>

@@ -12,6 +12,7 @@ import data from "@emoji-mart/data";
 import SuccessBox from "../components/SuccessBox";
 import ErrorMsg from "../components/ErrorMsg";
 import { useNavigate } from "react-router";
+import { Checkbox } from "@material-tailwind/react";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -22,7 +23,7 @@ const CreatePost = () => {
   const [status, setStatus] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [url, setUrl] = useState();
+  const [url, setUrl] = useState("");
   const navigate = useNavigate();
 
   const { currentUser } = useContext(UserContext);
@@ -195,24 +196,14 @@ const CreatePost = () => {
           </div>
         </div>
 
-        <div className="">
-          <label
-            htmlFor="random"
-            className=" text-sm mt-2 text-gray-600"
-          >
-            No image? Generate a random one 🏞️
-          </label>
-       
-            <input
-              type="checkbox"
-              name="random"
-              id="random"
-              className=" rounded-sm mx-3 "
-              onChange={() => setUrl("https://picsum.photos/600/400")}
-            />
+ 
         
-        </div>
+        <Checkbox label="No image? Generate a random one" 
+        color="pink"
+        className=""
+        onChange={() => setUrl("https://picsum.photos/600/400")}></Checkbox>
 
+  
 
 
         <div
