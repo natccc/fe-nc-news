@@ -60,10 +60,10 @@ const ArticleCard = (props) => {
 
   return (
     <article
-      className=" rounded-lg shadow hover:cursor-pointer"
+      className=" rounded-lg border  hover:cursor-pointer"
       onClick={(e) => handleArticleClick(e)}
     >
-      <div className="p-2 hover:rounded-xl hover:bg-light_gray ">
+      <div className="p-3 hover:rounded-xl bg-gray-50 shadow rounded-md hover:bg-light_gray ">
         <div className="flex items-center gap-3">
           <p
             onClick={(e) => handleTopicClick(e)}

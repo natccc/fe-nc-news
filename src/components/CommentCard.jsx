@@ -54,7 +54,7 @@ const CommentCard = (props) => {
   };
 
   return (
-    <div className=" rounded-md border-2 p-2  shadow-sm ">
+    <div className=" rounded-md border-2 p-2 bg-gray-50 shadow-sm ">
       <div className="">
         <div className="my-1 flex items-center gap-2">
           <p
