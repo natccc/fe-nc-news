@@ -4,7 +4,7 @@ Welcome to NC News - a social news aggregation, web content rating and discussio
 
 ## Deployed Version
 
-You can access the deployed version of NC News by following this [link](https://spiffy-queijadas-5cf171.netlify.app/).
+You can access the deployed version of NC News by following this [link](https://natalie-nc-news.netlify.app/).
 
 ## Backend Repository
 
